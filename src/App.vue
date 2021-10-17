@@ -44,6 +44,7 @@
         <main  >
         <router-view />
     </main>
+    
         <footer class="py-5 bg-dark">
             <div class="container px-5"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
         </footer>
@@ -92,14 +93,19 @@ export default {
                 });
             });
         }
+ 
 
         return {
             // Lo que retornemos acá va a estar en la vista.
             authUser,
-            doLogout,
+            doLogout, 
         };
     }
 };
+ 
+ 
+        
+
 </script>
 
 <style>

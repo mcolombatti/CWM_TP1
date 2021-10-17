@@ -17,8 +17,8 @@
     "autoprefixer": "^10.3.7",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.3.2", 
-    "style-loader": "^3.2.1", 
+    "html-webpack-plugin": "^5.3.2",
+    "style-loader": "^3.2.1",
     "vue-loader": "^16.8.1",
     "webpack": "^5.58.2",
     "webpack-cli": "^4.9.0",
@@ -30,7 +30,8 @@
     "not dead"
   ],
   "dependencies": {
-    "bootstrap": "^5.1.1", 
+    "babel-polyfill": "^6.26.0",
+    "bootstrap": "^5.1.1",
     "firebase": "^9.0.2",
     "vue": "^3.2.20",
     "vue-router": "^4.0.12"

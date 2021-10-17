@@ -13,7 +13,7 @@ export default () => {
         email: null,
         displayName: null,
     });
-
+    
     const unsubscribe = authStateSubscribe(user => authUser.value = user);
 
     onUnmounted(() => {

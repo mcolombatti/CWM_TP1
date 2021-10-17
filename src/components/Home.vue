@@ -113,6 +113,7 @@
                                     <i class="bi bi-star-fill text-warning"></i>
                                     Pro
                                 </div>
+
                                 <div class="mb-3">
                                     <span class="display-4 fw-bold">$9</span>
                                     <span class="text-muted">/ mo.</span>
@@ -243,6 +244,8 @@
                 </div>
             </div>
         </section>
+        <div id="consola">             <div>{{prices}}</div>
+</div>
         <!-- Contact section-->
         <section class="bg-light py-5">
             <div class="container px-5 my-5 px-5">
@@ -298,6 +301,7 @@
                                     <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
                                 </div>
                             </div>
+                           
                             <!-- Submit error message-->
                             <!---->
                             <!-- This is what your users will see when there is-->
@@ -309,20 +313,42 @@
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Footer-->
+        </section> 
     </div>
 </template>
 
-<script>
+<script> 
+  
+import {getFirestore,  collection, getDocs } from "firebase/firestore";
+import 'babel-polyfill';
+import {getPrices} from '../services/firebase.js'
+ 
+const db = getFirestore();
 export default {
     name: "Home",
-    // components: {},
-    // props: {},
-    // data: () => ({}),
-    // computed: {},
-    // methods: {}
-};
+    setup() {
+        // "ref" define una "ref"erencia reactiva, que se asocia al sistema de reactividad de Vue.
+        // Por ejemplo, si este valor cambia, cualquier vista que lo utiliza se va a actualizar también.
+        // Lo que hay que saber es que para usar luego los valores de una "ref", tenemos que accederlos
+        // siempre a través de su propiedad ".value" (pueden pensarlo como el reemplazo del "this." de la
+        // API de Options).
+        // Ese ".value" no aplica en la vista.
+        // const authUser = ref({
+        //     email: null,
+        //     displayName: null,
+        // });
+        //
+        // authStateSubscribe(user => {
+        //     // Actualizamos el "value" de la "ref" definida.
+        //     authUser.value = user;
+        // });
+        const {prices} = getPrices(db);
+ console.log(getPrices(db))
+
+        return { 
+            prices, 
+        };
+}}
 </script>
 
 <style>
