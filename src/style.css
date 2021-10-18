@@ -6,3 +6,28 @@ html, body, #root {
   display: grid;
   grid-template-rows: 58px 1fr 100px;
 } 
+#register, #profile, #login{
+  height: 100vh;
+  display: flex;
+  /* flex-wrap: wrap; */
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+#logo {
+  width: 150px;
+  height: 70px;
+  background: url("./static/logo.png");
+  font-size: 0;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: contain;
+  top: 8px;
+  left: 20px;
+  z-index: 1;
+}
+#logo1 { 
+  background-image: url("./static/logo1.jpg"); background-repeat: no-repeat;
+  background-size: contain;
+}

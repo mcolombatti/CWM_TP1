@@ -1,8 +1,4 @@
  
-// En esta implementación, vamos a trabajar con Firebase Authentication.
-// Pero ese dato solo va a ser conocido para _este_ archivo. El resto del programa entero no va a saber de
-// Firebase Authentication.
-// Por supuesto, vamos a usar la versión nueva modular de Firebase.
 import {
     getAuth,
     signInWithEmailAndPassword,
@@ -11,8 +7,7 @@ import {
     onAuthStateChanged,
     updateProfile
 } from 'firebase/auth'
-
-// Inicializamos la autenticación de Firebase.
+ 
 const auth = getAuth();
 
 let userData = {
@@ -31,17 +26,10 @@ onAuthStateChanged(auth, user => {
             email: null,
             displayName: null,
         };
-    }
-    // Notificamos a todos los observers.
+    } 
     notifyAll();
 });
-
-/*
- |--------------------------------------------------------------------------
- | Implementación de Observer
- |--------------------------------------------------------------------------
- */
-// Definimos un array con los callbacks de los observers.
+  
 let observers = [];
 
 /**
@@ -52,14 +40,12 @@ let observers = [];
  */
 export function authStateSubscribe(observerCallback) {
     observers.push(observerCallback);
-
-    // Notificamos inmediatamente al observer de la data actual del usuario, para que la tenga disponible.
+ 
     notify(observerCallback);
 
     console.log("Observer agregado, stack actual: ", observers);
 
-    return () => {
-        // Eliminamos el callback agregado del stack.
+    return () => { 
         observers = observers.filter(callback => callback !== observerCallback);
     }
 }
@@ -70,8 +56,7 @@ export function authStateSubscribe(observerCallback) {
  * @param {Function} callback
  */
 function notify(callback) {
-    // Invocamos el callback (que provendrá del array de observers) y le pasamos la data del usuario
-    // autenticado.
+    
     callback({...userData});
 }
 
@@ -81,12 +66,7 @@ function notify(callback) {
 function notifyAll() {
     observers.forEach(obs => notify(obs));
 }
-
-/*
- |--------------------------------------------------------------------------
- | Exports de las funciones.
- |--------------------------------------------------------------------------
- */
+ 
 /**
  * Autentica al usuario.
  *

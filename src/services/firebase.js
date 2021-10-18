@@ -1,4 +1,3 @@
- 
 import {initializeApp} from "firebase/app"; 
 
 import {getFirestore,  collection, getDocs } from "firebase/firestore";
@@ -13,8 +12,6 @@ import 'babel-polyfill';
     messagingSenderId: "480976720676",
     appId: "1:480976720676:web:965538416f033307de99b1"
 });
-
- 
 const db = getFirestore(); 
  export async function getPrices(db) {
   const citiesCol = collection(db, 'pricing');

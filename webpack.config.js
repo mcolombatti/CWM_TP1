@@ -5,7 +5,7 @@ module.exports = {
     plugins: [
     new HtmlWebpackPlugin({
         template: 'public/index.html',
-       
+        title: 'DaVinciHosting'
     }),
     new VueLoaderPlugin(),
 ],
