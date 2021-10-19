@@ -33,12 +33,12 @@ onAuthStateChanged(auth, user => {
 let observers = [];
 
 /**
- * Registra un observer para ser notificado.
+ * Permite registrar un observer para ser notificado
  *
  * @param {Function} observerCallback
  * @return {Function} - Función para cancelar la suscripción.
  */
-export function authStateSubscribe(observerCallback) {
+export function authState(observerCallback) {
     observers.push(observerCallback);
  
     notify(observerCallback);
@@ -51,7 +51,7 @@ export function authStateSubscribe(observerCallback) {
 }
 
 /**
- * Notifica a un callback de un observador de algún cambio.
+ * si hay algún cambio notifica al callback de un observador
  *
  * @param {Function} callback
  */
@@ -61,7 +61,7 @@ function notify(callback) {
 }
 
 /**
- * Notifica a todos los observadores.
+ * Avisa/notifica a todos los observadores
  */
 function notifyAll() {
     observers.forEach(obs => notify(obs));
@@ -77,7 +77,12 @@ function notifyAll() {
 export function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password)
         .then(credentials => {
-            console.log("Usuario autenticado... ", credentials);
+            this.$toast.open({
+                message: "Sesion iniciada",
+                type: "success",
+                duration: 5000,
+                dismissible: true
+              })
         })
         .catch(err => {
             console.error("Error al autenticar al usuario: ", err);
@@ -102,7 +107,7 @@ export function register(email, password) {
 }
 
 /**
- * Cierra la sesión actual.
+ * Permite cerrar la sesión actual.
  *
  * @return {Promise<void>}
  */
@@ -111,7 +116,7 @@ export function logout() {
 }
 
 /**
- * Actualiza los datos del usuario autenticado.
+ * Permite actualizar los datos del usuario autenticado.
  *
  * @param {{displayName: string}} newData
  * @return {Promise<void>}
@@ -119,8 +124,7 @@ export function logout() {
 export function updateUserProfile(newData) {
     return updateProfile(auth.currentUser, newData)
         .then(() => {
-            // Si hubo éxito, actualizamos la data del usuario, y notificamos a los observers del cambio.
-            userData.displayName = newData.displayName;
+             userData.displayName = newData.displayName;
             notifyAll();
         })
         .catch(err => {

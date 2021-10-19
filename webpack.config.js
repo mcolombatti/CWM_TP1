@@ -13,6 +13,7 @@ module.exports = {
 module: {
    
     rules: [
+       
         {
            
             test: /\.js$/, 
@@ -27,7 +28,14 @@ module: {
         {
             test: /\.css$/,
             use: ['style-loader', 'css-loader'],
-        },
+        }, {
+            test: /\.(png|jpg|jpe?g|gif)$/i,
+            use: [
+              {
+                loader: 'file-loader',
+              },
+            ],
+          },
         {
             test: /\.vue$/,
             use: 'vue-loader',

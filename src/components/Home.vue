@@ -5,16 +5,16 @@
                 <div class="row gx-5 justify-content-center">
                     <div class="col-lg-9">
                         <div class="text-center my-5">
+                        
                             <h1 class="display-8 pb-5 fw-bolder text-white mb-2">Da Vinci Hosting, ofrecemos el mejor
                                 servicio segun tus necesidades</h1>
                             <p class="lead text-white-50 mb-4">Necesitas un servicio de hosting web potente. Nuestras
                                 soluciones de hosting harán que tus sitios web sean realmente veloces.</p>
+                                <img src="../assets/images/hero.png" class="img-fluid" alt="dominios disponibles">  
                             <div class="d-grid pt-5 gap-3 d-sm-flex justify-content-sm-center">
-                                <li class="nav-item">
-                                    <router-link class="  btn btn-primary btn-lg px-4 me-sm-3" to="/registro">Comenzar
+                                     <router-link class="  btn btn-primary btn-lg px-4 me-sm-3" to="/registro">Comenzar
                                     </router-link>
-                                </li>
-                            </div>
+                                                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,7 +67,8 @@
                 <div class="container container-2020">
                     <div id="domain-tlds">
                         <div class="domain-tlds-container m-auto">
-                            <div class="d-flex align-items-center"> </div>
+                            <div class="d-flex align-items-center">
+        <img src="../assets/images/domains.jpg" class="img-fluid" alt="dominios disponibles"> </div>
                         </div>
                     </div>
                 </div>
@@ -87,41 +88,26 @@
                                 <div class="small text-uppercase fw-bold text-muted">Free</div>
                                 <div class="mb-3">
                                     <span class="display-4 fw-bold">$0</span>
-                                    <span class="text-muted">/ mo.</span>
+                                    <span class="text-muted">/mes</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        <strong>1 users</strong>
+                                        <p>1 users</p>
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        5GB storage
+                                        1 Sitio Web
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Unlimited public projects
+                                        300 MB de Espacio En Disc
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Community access
+                                        Ancho de banda limitado (3 GB)
                                     </li>
-                                    <li class="mb-2 text-muted">
-                                        <i class="bi bi-x"></i>
-                                        Unlimited private projects
-                                    </li>
-                                    <li class="mb-2 text-muted">
-                                        <i class="bi bi-x"></i>
-                                        Dedicated support
-                                    </li>
-                                    <li class="mb-2 text-muted">
-                                        <i class="bi bi-x"></i>
-                                        Free linked domain
-                                    </li>
-                                    <li class="text-muted">
-                                        <i class="bi bi-x"></i>
-                                        Monthly status reports
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -136,12 +122,12 @@
 
                                 <div class="mb-3">
                                     <span class="display-4 fw-bold">$9</span>
-                                    <span class="text-muted">/ mo.</span>
+                                    <span class="text-muted">/mes</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        <strong>5 users</strong>
+                                        <p>30 GB de Espacio En Disco</p>
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
@@ -149,29 +135,17 @@
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Unlimited public projects
+                                        Atención 24/7/365
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Community access
+                                        Ancho de banda Limitado (100 GB)
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Unlimited private projects
+                                        1 Cuenta de correo electrónico
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Dedicated support
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Free linked domain
-                                    </li>
-                                    <li class="text-muted">
-                                        <i class="bi bi-x"></i>
-                                        Monthly status reports
-                                    </li>
-                                </ul>
+                                                                    </ul>
                             </div>
                         </div>
                     </div>
@@ -181,42 +155,34 @@
                                 <div class="small text-uppercase fw-bold text-muted">Enterprise</div>
                                 <div class="mb-3">
                                     <span class="display-4 fw-bold">$49</span>
-                                    <span class="text-muted">/ mo.</span>
+                                    <span class="text-muted">/mes</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        <strong>Unlimited users</strong>
+                                        <p>Sitios Web Ilimitados</p>
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        5GB storage
+                                        100 GB de Espacio En Disco
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Unlimited public projects
+                                       Ancho de banda Ilimitado
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Community access
+                                        100 Cuentas de Correo
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Unlimited private projects
+                                        Atención 24/7/365
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                        Dedicated support
+                                       Dominio Gratis
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        <strong>Unlimited</strong>
-                                        linked domains
-                                    </li>
-                                    <li class="text-muted">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Monthly status reports
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -227,7 +193,7 @@
         <section class="py-5 border-bottom">
             <div class="container px-5 my-5 px-5">
                 <div class="text-center mb-5">
-                    <h2 class="fw-bolder">Opiniones de nuestros</h2>
+                    <h2 class="fw-bolder">Opiniones de nuestros clientes</h2>
                     <p class="lead mb-0">Nuestros clientes estan contentos de usar DaVinci Hosting</p>
                 </div>
                 <div class="row gx-5 justify-content-center">
@@ -308,8 +274,7 @@
             };
         }
     }
-</script>
-
+</script>  
 <style>
-
+#logo{color: #093eae; font-weight: 700;}
 </style>

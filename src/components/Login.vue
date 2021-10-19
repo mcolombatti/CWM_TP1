@@ -5,7 +5,7 @@
             <form
                 action="#"
                 method="post"
-                @submit.prevent="handleLogin()"
+                @submit.prevent="handleLogin() & open()"
             >
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
@@ -29,6 +29,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Ingresar</button>
             </form>
+     
         </div>
     </div>
 </template>
@@ -46,21 +47,22 @@ export default {
             password: '',
         }
     }),
-    // computed: {},
+    
     methods: {
         handleLogin() {
             // TODO: Validar...
 
             login(this.user.email, this.user.password)
                 .then(() => {
-                    console.log("[Login] Usuario autenticado.");
+                    
                     if(this.$route.query?.redirect !== undefined) {
                         this.$router.push({
                             path: this.$route.query.redirect
                         });
                     }
                 });
-        }
+                
+        }, 
     }
 };
 </script>

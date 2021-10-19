@@ -14,20 +14,4 @@ html, body, #root {
   align-items: center;
   justify-content: center;
 }
-
-#logo {
-  width: 150px;
-  height: 70px;
-  background: url("./assets/images/logo.png");
-  font-size: 0;
-  position: absolute;
-  background-repeat: no-repeat;
-  background-size: contain;
-  top: 8px;
-  left: 20px;
-  z-index: 1;
-}
-#logo1 { 
-  background-image: url("./assets/images/logo1.jpg"); background-repeat: no-repeat;
-  background-size: contain;
-}
+  

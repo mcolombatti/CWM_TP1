@@ -32,7 +32,7 @@
 <script>
 import {authStateSubscribe, updateUserProfile} from "../services/auth.js";
 import {onUnmounted, ref} from "vue";
-import useAuth from "../composition/useAuth.js";
+import authUser from "../composition/useAuth.js";
 import { createToast } from 'mosha-vue-toastify';
 import 'mosha-vue-toastify/dist/style.css'
 export default {
@@ -94,10 +94,8 @@ export default {
         function updateProfile() {
             updateUserProfile(form.value);
         }
-const toast = () => {
-        createToast('Wow, easy')
-    } 
-        return {toast,
+ 
+        return {  
             authUser,
             form,
             updateProfile,
