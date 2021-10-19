@@ -18,7 +18,7 @@ html, body, #root {
 #logo {
   width: 150px;
   height: 70px;
-  background: url("./static/logo.png");
+  background: url("./assets/images/logo.png");
   font-size: 0;
   position: absolute;
   background-repeat: no-repeat;
@@ -28,6 +28,6 @@ html, body, #root {
   z-index: 1;
 }
 #logo1 { 
-  background-image: url("./static/logo1.jpg"); background-repeat: no-repeat;
+  background-image: url("./assets/images/logo1.jpg"); background-repeat: no-repeat;
   background-size: contain;
 }
