@@ -5,23 +5,23 @@
                 <div class="row gx-5 justify-content-center">
                     <div class="col-lg-9">
                         <div class="text-center my-5">
-                        
+
                             <h1 class="display-8 pb-5 fw-bolder text-white mb-2">Da Vinci Hosting, ofrecemos el mejor
                                 servicio segun tus necesidades</h1>
                             <p class="lead text-white-50 mb-4">Necesitas un servicio de hosting web potente. Nuestras
                                 soluciones de hosting harán que tus sitios web sean realmente veloces.</p>
-                                <img src="../assets/images/hero.png" class="img-fluid" alt="dominios disponibles">  
+                            <img src="../assets/images/hero.png" class="img-fluid" alt="dominios disponibles">
                             <div class="d-grid pt-5 gap-3 d-sm-flex justify-content-sm-center">
-                                     <router-link class="  btn btn-primary btn-lg px-4 me-sm-3" to="/registro">Comenzar
-                                    </router-link>
-                                                            </div>
+                                <router-link class="  btn btn-primary btn-lg px-4 me-sm-3" to="/registro">Comenzar
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- ACA DEBERIA TRAER LOS DATOS DE FIRESTORE--->
-        <p>{{prices}}</p>
+
         <section class="py-5 border-bottom" id="features">
             <div class="container px-5 my-5">
                 <div class="row gx-5">
@@ -68,7 +68,8 @@
                     <div id="domain-tlds">
                         <div class="domain-tlds-container m-auto">
                             <div class="d-flex align-items-center">
-        <img src="../assets/images/domains.jpg" class="img-fluid" alt="dominios disponibles"> </div>
+                                <img src="../assets/images/domains.jpg" class="img-fluid" alt="dominios disponibles">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -87,7 +88,7 @@
                             <div class="card-body p-5">
                                 <div class="small text-uppercase fw-bold text-muted">Free</div>
                                 <div class="mb-3">
-                                    <span class="display-4 fw-bold">$0</span>
+                                    <span class="display-4 fw-bold"> {{free}} </span>
                                     <span class="text-muted">/mes</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
@@ -107,7 +108,7 @@
                                         <i class="bi bi-check text-primary"></i>
                                         Ancho de banda limitado (3 GB)
                                     </li>
-                                    
+
                                 </ul>
                             </div>
                         </div>
@@ -121,7 +122,7 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <span class="display-4 fw-bold">$9</span>
+                                    <span class="display-4 fw-bold">{{premium}}</span>
                                     <span class="text-muted">/mes</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
@@ -145,7 +146,7 @@
                                         <i class="bi bi-check text-primary"></i>
                                         1 Cuenta de correo electrónico
                                     </li>
-                                                                    </ul>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -154,7 +155,7 @@
                             <div class="card-body p-5">
                                 <div class="small text-uppercase fw-bold text-muted">Enterprise</div>
                                 <div class="mb-3">
-                                    <span class="display-4 fw-bold">$49</span>
+                                    <span class="display-4 fw-bold">{{enterprise}}</span>
                                     <span class="text-muted">/mes</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
@@ -168,7 +169,7 @@
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                       Ancho de banda Ilimitado
+                                        Ancho de banda Ilimitado
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
@@ -180,9 +181,9 @@
                                     </li>
                                     <li class="mb-2">
                                         <i class="bi bi-check text-primary"></i>
-                                       Dominio Gratis
+                                        Dominio Gratis
                                     </li>
-                                    
+
                                 </ul>
                             </div>
                         </div>
@@ -227,54 +228,60 @@
                 </div>
             </div>
         </section>
-        <div id="consola">
-            <div>{{prices}}</div>
-        </div>
-
     </div>
 </template>
 
 <script>
     import {
         getFirestore,
-        collection,
-        getDocs
+
     } from "firebase/firestore";
     import 'babel-polyfill';
     import {
-        getPrices
+        getPrices,
+        getPrices2,
+        getPrices3,
     } from '../services/firebase.js'
+    import {
+        onMounted,
+        ref
+    } from "vue";
 
     const db = getFirestore();
     export default {
         name: "Home",
         setup() {
-            // "ref" define una "ref"erencia reactiva, que se asocia al sistema de reactividad de Vue.
-            // Por ejemplo, si este valor cambia, cualquier vista que lo utiliza se va a actualizar también.
-            // Lo que hay que saber es que para usar luego los valores de una "ref", tenemos que accederlos
-            // siempre a través de su propiedad ".value" (pueden pensarlo como el reemplazo del "this." de la
-            // API de Options).
-            // Ese ".value" no aplica en la vista.
-            // const authUser = ref({
-            //     email: null,
-            //     displayName: null,
-            // });
-            //
-            // authStateSubscribe(user => {
-            //     // Actualizamos el "value" de la "ref" definida.
-            //     authUser.value = user;
-            // });
-            const {
-                prices
-            } = getPrices(db);
-            console.log(getPrices(db))
+            const free = ref([]);
+            onMounted(async () => {
+                const res = await getPrices(db)
+                free.value = res
+                console.log(free);
+            });
+            const premium = ref([]);
+            onMounted(async () => {
+                const res = await getPrices2(db)
+                premium.value = res
+                console.log(premium);
+            });
+
+            const enterprise = ref([]);
+            onMounted(async () => {
+                const res = await getPrices3(db)
+                enterprise.value = res
+                console.log(enterprise);
+            });
 
             return {
-                prices,
+                premium,
+                free,
+                enterprise
             };
         }
     }
-</script>  
+</script>
 <style>
-#logo{color: #093eae; font-weight: 700;}
+    #logo {
+        color: #093eae;
+        font-weight: 700;
+    }
 </style>

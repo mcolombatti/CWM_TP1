@@ -32,52 +32,11 @@
 <script>
 import {authStateSubscribe, updateUserProfile} from "../services/auth.js";
 import {onUnmounted, ref} from "vue";
-import authUser from "../composition/useAuth.js";
-import { createToast } from 'mosha-vue-toastify';
-import 'mosha-vue-toastify/dist/style.css'
+import useAuth from "../composition/useAuth.js";
 export default {
-    name: "Profile",
-    // data: function() {
-    //     return {
-    //         authUser: {
-    //             email: null,
-    //             displayName: null,
-    //         },
-    //         authUnsubscribe: null,
-    //         form: {
-    //             displayName: null,
-    //         }
-    //     };
-    // },
-    // methods: {
-    //     updateProfile() {
-    //         updateUserProfile(this.form);
-    //     }
-    // },
-    // mounted() {
-    //     this.authUnsubscribe = authStateSubscribe(user => this.authUser = user);
-    //     this.form.displayName = this.authUser.displayName;
-    // },
-    // unmounted() {
-    //     // Cancelamos la suscripción.
-    //     this.authUnsubscribe();
-    // },
+    name: "Profile", 
     setup() {
-        /*
-         |--------------------------------------------------------------------------
-         | Autenticación
-         |--------------------------------------------------------------------------
-         */
-        // const authUser = ref({
-        //     email: null,
-        //     displayName: null,
-        // });
-        //
-        // const unsubscribe = authStateSubscribe(user => authUser.value = user);
-        //
-        // onUnmounted(() => {
-        //     unsubscribe();
-        // });
+     
         const {authUser} = useAuth();
 
         /*
@@ -94,8 +53,8 @@ export default {
         function updateProfile() {
             updateUserProfile(form.value);
         }
- 
-        return {  
+
+        return {
             authUser,
             form,
             updateProfile,
