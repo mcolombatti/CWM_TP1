@@ -13,6 +13,7 @@ import 'babel-polyfill';
     appId: "1:480976720676:web:965538416f033307de99b1"
 });
 const db = getFirestore(); 
+/*
  export async function getPrices(db) {
   const priceList = collection(db, 'pricing');
   const pricesSnapshot = await getDocs(priceList);
@@ -39,4 +40,13 @@ const db = getFirestore();
   console.log(pricesList[0])
   return pricesList[0]
   
+} */
+export async function getPrices(db) {
+  const priceList = collection(db, 'pricing');
+  const pricesSnapshot = await getDocs(priceList);
+  const test = {};
+  const pricesList = pricesSnapshot.forEach((doc) => {
+    test[doc.id] = doc.data();
+  });
+  return test
 } 

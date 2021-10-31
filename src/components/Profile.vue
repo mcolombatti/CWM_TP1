@@ -1,7 +1,6 @@
 <template>
-    <div><div id="profile"><template>
-  <button @click="toast">Toast it!</button>
-</template>
+    <div><div id="profile"> 
+ 
         <div>
             
                 <div class="mb-3">
@@ -23,6 +22,10 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
+            <form action="#"
+                    id="price"
+                    @submit.prevent="setPrice"><input type="text"   > 
+                    <button type="submit" class="btn btn-primary">enviar</button></form>
                 <div id="profileConsole"></div>
         </div>
     </div>
@@ -31,10 +34,16 @@
 
 <script>
 import {authStateSubscribe, updateUserProfile} from "../services/auth.js";
-import {onUnmounted, ref} from "vue";
+import {setPrices} from "../services/firebase.js";
+    import {
+        getFirestore,
+
+    } from "firebase/firestore";
+import {onUnmounted, ref} from "vue"; const db = getFirestore();
 import useAuth from "../composition/useAuth.js";
 export default {
     name: "Profile", 
+    
     setup() {
      
         const {authUser} = useAuth();
@@ -59,7 +68,23 @@ export default {
             form,
             updateProfile,
         };
-    }
+    },
+    methods:
+    {
+        setPrice(db) {
+            db.collection("pricing").doc("Master").set({
+    price: 3000,
+   
+})
+.then(() => {
+    console.log("Document successfully written!");
+})
+.catch((error) => {
+    console.error("Error writing document: ", error);
+});
+  
+        }
+    },
 };
 </script>
 

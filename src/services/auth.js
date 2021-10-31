@@ -77,12 +77,7 @@ function notifyAll() {
 export function login(email, password) {
     return signInWithEmailAndPassword(auth, email, password)
         .then(credentials => {
-            this.$toast.open({
-                message: "Sesion iniciada",
-                type: "success",
-                duration: 5000,
-                dismissible: true
-              })
+            console.log('inicio sesion')
         })
         .catch(err => {
             console.error("Error al autenticar al usuario: ", err);

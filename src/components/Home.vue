@@ -86,28 +86,38 @@
                     <div class="col-lg-6 col-xl-4">
                         <div class="card mb-5 mb-xl-0">
                             <div class="card-body p-5">
-                                <div class="small text-uppercase fw-bold text-muted">Free</div>
+                                <div class="small text-uppercase fw-bold text-muted">Enterprise</div>
                                 <div class="mb-3">
-                                    <span class="display-4 fw-bold"> {{free}} </span>
+                                    <span class="display-4 fw-bold">{{free.precio}}</span>
                                     <span class="text-muted">/mes</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        <p>1 users</p>
+                                    <li class="mb-2 options h5">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{free.anchobanda}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        1 Sitio Web
+                                    <li class="mb-2 options h5">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{free.web}}</p>
+                                    </li> 
+                                    
+                                    <li class="mb-2 options  h5">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{free.capacidad}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        300 MB de Espacio En Disc
-                                    </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Ancho de banda limitado (3 GB)
-                                    </li>
+                                   
 
                                 </ul>
                             </div>
@@ -115,37 +125,55 @@
                     </div>
                     <div class="col-lg-6 col-xl-4">
                         <div class="card mb-5 mb-xl-0">
-                            <div class="card-body p-5">
-                                <div class="small text-uppercase fw-bold">
-                                    <i class="bi bi-star-fill text-warning"></i>
-                                    Pro
-                                </div>
-
+                           <div class="card-body p-5">
+                                <div class="small text-uppercase fw-bold text-muted">Free</div>
                                 <div class="mb-3">
-                                    <span class="display-4 fw-bold">{{premium}}</span>
+                                    <span class="display-4 fw-bold">{{pro.precio}}</span>
                                     <span class="text-muted">/mes</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        <p>30 GB de Espacio En Disco</p>
+                                    <li class="mb-2 options h5">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{pro.anchobanda}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        5GB storage
+                                    <li class="mb-2 options h5">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{pro.web}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Atención 24/7/365
+                                    
+                                    <li class="mb-2 options h5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{pro.correo}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Ancho de banda Limitado (100 GB)
+                                    <li class="mb-2 options  h5">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{pro.capacidad}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        1 Cuenta de correo electrónico
+                                    <li class="mb-2 options h5">
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{pro.atencion}}</p>
                                     </li>
+
                                 </ul>
                             </div>
                         </div>
@@ -155,33 +183,57 @@
                             <div class="card-body p-5">
                                 <div class="small text-uppercase fw-bold text-muted">Enterprise</div>
                                 <div class="mb-3">
-                                    <span class="display-4 fw-bold">{{enterprise}}</span>
+                                    <span class="display-4 fw-bold">{{enterprise.precio}}</span>
                                     <span class="text-muted">/mes</span>
                                 </div>
                                 <ul class="list-unstyled mb-4">
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        <p>Sitios Web Ilimitados</p>
+                                    <li class="mb-2 options h5">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{enterprise.anchobanda}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        100 GB de Espacio En Disco
+                                    <li class="mb-2 options h5">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{enterprise.web}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Ancho de banda Ilimitado
+                                    <li class="mb-2 options h5">
+                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{enterprise.dominio}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        100 Cuentas de Correo
+                                    <li class="mb-2 options h5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{enterprise.correo}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Atención 24/7/365
+                                    <li class="mb-2 options  h5">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{enterprise.capacidad}}</p>
                                     </li>
-                                    <li class="mb-2">
-                                        <i class="bi bi-check text-primary"></i>
-                                        Dominio Gratis
+                                    <li class="mb-2 options h5">
+                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-check" viewBox="0 0 16 16">
+                                            <path
+                                                d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z" />
+                                        </svg>
+                                        <p>{{enterprise.atencion}}</p>
                                     </li>
 
                                 </ul>
@@ -233,14 +285,11 @@
 
 <script>
     import {
-        getFirestore,
-
+        getFirestore
     } from "firebase/firestore";
     import 'babel-polyfill';
     import {
-        getPrices,
-        getPrices2,
-        getPrices3,
+        getPrices
     } from '../services/firebase.js'
     import {
         onMounted,
@@ -251,28 +300,40 @@
     export default {
         name: "Home",
         setup() {
-            const free = ref([]);
-            onMounted(async () => {
-                const res = await getPrices(db)
-                free.value = res
-                console.log(free);
-            });
-            const premium = ref([]);
-            onMounted(async () => {
-                const res = await getPrices2(db)
-                premium.value = res
-                console.log(premium);
-            });
+            // const free = ref([]);
+            // onMounted(async () => {
+            //     const res = await getPrices(db)
+            //     free.value = res
+            //     console.log(free);
+            // });
+            // const premium = ref([]);
+            // onMounted(async () => {
+            //     const res = await getPrices2(db)
+            //     premium.value = res
+            //     console.log(premium);
+            // });
 
+            // const enterprise = ref([]);
+            // onMounted(async () => {
+            //     const res = await getPrices3(db)
+            //     enterprise.value = res
+            //     console.log(enterprise);
+            // });
+            const free = ref([]);
+            const pro = ref([]);
             const enterprise = ref([]);
             onMounted(async () => {
-                const res = await getPrices3(db)
-                enterprise.value = res
-                console.log(enterprise);
-            });
+                const res = await getPrices(db)
+                free.value = res.free;
+                pro.value = res.pro;
+                enterprise.value = res.enterprise;
+                console.log(res);
+                console.log(free.value);
+                console.log(free.value.capacidad);
 
+            });
             return {
-                premium,
+                pro,
                 free,
                 enterprise
             };
@@ -283,5 +344,10 @@
     #logo {
         color: #093eae;
         font-weight: 700;
+    }
+
+    .options {
+        display: flex;
+        align-items: baseline;
     }
 </style>
