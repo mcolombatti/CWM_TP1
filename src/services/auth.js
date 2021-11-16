@@ -8,7 +8,15 @@ import {
     updateProfile
 } from 'firebase/auth'
  
+import {
+    getFirestore,
+    doc,
+    setDoc, Timestamp,
+} from "firebase/firestore";
+
 const auth = getAuth();
+
+const db = getFirestore();
 
 let userData = {
     email: null,
@@ -95,6 +103,12 @@ export function register(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
         .then(credentials => {
             console.log("Usuario creado... ", credentials);
+        
+            return setDoc(doc(db, 'users', credentials.user.uid), {
+                email,
+                displayName: null,
+                created_at: Timestamp.now()
+            });
         })
         .catch(err => {
             console.error("Error al crear el usuario: ", err);

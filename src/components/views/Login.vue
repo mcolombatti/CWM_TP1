@@ -1,5 +1,5 @@
 <template>
-    <div id="login">
+    <div class="vista-container">
         <div>
             <h1>Iniciar Sesión</h1>
             <form
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import {login} from "../services/auth.js";
+import {login} from "../../services/auth.js";
 
 export default {
     name: "Login",

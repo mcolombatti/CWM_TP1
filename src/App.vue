@@ -16,7 +16,10 @@
                             </li>
                             <template
                             v-if="authUser.email !== null"
-                        > <li class="nav-item pr-5">
+                        > 
+                        <li class="nav-item">
+                            <router-link class="nav-link" to="/chat">Chat</router-link>
+                        </li><li class="nav-item pr-5">
                                 <router-link class="nav-link" to="/perfil">Perfil</router-link>
                             </li>
                             <li class="nav-item px-3">

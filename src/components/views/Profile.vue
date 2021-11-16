@@ -1,5 +1,5 @@
 <template>
-    <div><div id="profile"> 
+    <div><div class="vista-container"> 
  
         <div>
             
@@ -33,14 +33,14 @@
 </template>
 
 <script>
-import {authStateSubscribe, updateUserProfile} from "../services/auth.js";
-import {setPrices} from "../services/firebase.js";
+import {authStateSubscribe, updateUserProfile} from "../../services/auth.js";
+import {setPrices} from "../../services/firebase.js";
     import {
         getFirestore,
 
     } from "firebase/firestore";
 import {onUnmounted, ref} from "vue"; const db = getFirestore();
-import useAuth from "../composition/useAuth.js";
+import useAuth from "../../composition/useAuth.js";
 export default {
     name: "Profile", 
     

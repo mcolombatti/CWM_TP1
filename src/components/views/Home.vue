@@ -290,7 +290,7 @@
     import 'babel-polyfill';
     import {
         getPrices
-    } from '../services/firebase.js'
+    } from '../../services/firebase.js'
     import {
         onMounted,
         ref

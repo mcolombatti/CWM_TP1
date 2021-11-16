@@ -1,5 +1,5 @@
 <template>
-     <div id="register"> 
+     <div class="vista-container"> 
        <div>
            <section id="section-register" class="mb-5 container">
                <h1>Registrarse</h1>
@@ -26,31 +26,31 @@
 
 <script>
 
-import {register} from "../services/auth.js";
+import {ref} from "vue";
+import {register} from "../../services/auth.js";
 export default {
     name: "Register",
-    // components: {},
-    // props: {},
-    // data: () => ({}),
-     data: () => ({
-        user: {
+     setup() {
+        const form = ref({
             email: '',
             password: '',
-        }
-    }),
-    // computed: {},
-    methods: {
-        handleRegister() {
-            // TODO: Validar...
+        });
 
-            register(this.user.email, this.user.password)
+        const handleSubmit = () => {
+            register(form.value.email, form.value.password)
                 .then(() => {
-                    console.log("Usuario registrado.");
+                    form.value = {
+                        email: '',
+                        password: '',
+                    }
                 });
         }
+
+        return {
+            form,
+            handleSubmit,
+        }
     }
-    // computed: {},
-    // methods: {}
 };
 </script>
 
