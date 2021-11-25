@@ -1,6 +1,6 @@
 
 import {onUnmounted, ref} from "vue";
-import {authState} from "../services/auth.js";
+import {authStateSubscribe} from "../services/auth.js";
 
 /**
  * Cuando se loguea con exito retorna el usuario autenticado, y  automáticamente con los cambios en el estado de
@@ -14,7 +14,7 @@ export default () => {
         displayName: null,
     });
     
-    const unsubscribe = authState(user => authUser.value = user);
+    const unsubscribe = authStateSubscribe(user => authUser.value = user);
 
     onUnmounted(() => {
         unsubscribe();

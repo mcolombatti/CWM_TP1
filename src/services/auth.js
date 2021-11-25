@@ -46,7 +46,7 @@ let observers = [];
  * @param {Function} observerCallback
  * @return {Function} - Función para cancelar la suscripción.
  */
-export function authState(observerCallback) {
+export function authStateSubscribe(observerCallback) {
     observers.push(observerCallback);
  
     notify(observerCallback);

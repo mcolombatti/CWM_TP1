@@ -10,7 +10,7 @@
                                 servicio segun tus necesidades</h1>
                             <p class="lead text-white-50 mb-4">Necesitas un servicio de hosting web potente. Nuestras
                                 soluciones de hosting harán que tus sitios web sean realmente veloces.</p>
-                            <img src="../assets/images/hero.png" class="img-fluid" alt="dominios disponibles">
+                            <img src="../../assets/images/hero.png" class="img-fluid" alt="dominios disponibles">
                             <div class="d-grid pt-5 gap-3 d-sm-flex justify-content-sm-center">
                                 <router-link class="  btn btn-primary btn-lg px-4 me-sm-3" to="/registro">Comenzar
                                 </router-link>
@@ -68,7 +68,7 @@
                     <div id="domain-tlds">
                         <div class="domain-tlds-container m-auto">
                             <div class="d-flex align-items-center">
-                                <img src="../assets/images/domains.jpg" class="img-fluid" alt="dominios disponibles">
+                                <img src="../../assets/images/domains.jpg" class="img-fluid" alt="dominios disponibles">
                             </div>
                         </div>
                     </div>
