@@ -27,7 +27,7 @@
     } from "firebase/firestore";
     import 'babel-polyfill';
     import {
-        getPrices
+        getPlanes
     } from '../../services/firebase.js'
     import {
         onMounted,
@@ -38,31 +38,12 @@
     export default {
         name: "Home",
         setup() {
-            // const free = ref([]);
-            // onMounted(async () => {
-            //     const res = await getPrices(db)
-            //     free.value = res
-            //     console.log(free);
-            // });
-            // const premium = ref([]);
-            // onMounted(async () => {
-            //     const res = await getPrices2(db)
-            //     premium.value = res
-            //     console.log(premium);
-            // });
-
-            // const enterprise = ref([]);
-            // onMounted(async () => {
-            //     const res = await getPrices3(db)
-            //     enterprise.value = res
-            //     console.log(enterprise);
-            // });
+             
             const planes = ref({
          
-    });
-       // const planes = ref([]); 
+    }); 
             onMounted(async () => {
-                const res = await getPrices(db)
+                const res = await getPlanes(db)
                 planes.value = res 
                 console.log(planes.value);
 

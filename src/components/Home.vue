@@ -10,7 +10,7 @@
                                 servicio segun tus necesidades</h1>
                             <p class="lead text-white-50 mb-4">Necesitas un servicio de hosting web potente. Nuestras
                                 soluciones de hosting harán que tus sitios web sean realmente veloces.</p>
-                            <img src="../../assets/images/hero.png" class="img-fluid" alt="dominios disponibles">
+                            <img src="../assets/images/hero.png" class="img-fluid" alt="dominios disponibles">
                             <div class="d-grid pt-5 gap-3 d-sm-flex justify-content-sm-center">
                                 <router-link class="  btn btn-primary btn-lg px-4 me-sm-3" to="/registro">Comenzar
                                 </router-link>
@@ -68,7 +68,7 @@
                     <div id="domain-tlds">
                         <div class="domain-tlds-container m-auto">
                             <div class="d-flex align-items-center">
-                                <img src="../../assets/images/domains.jpg" class="img-fluid" alt="dominios disponibles">
+                                <img src="../assets/images/domains.jpg" class="img-fluid" alt="dominios disponibles">
                             </div>
                         </div>
                     </div>
@@ -83,21 +83,111 @@
                         en tu servicio de Hosting</p>
                 </div>
                 <div class="row gx-5 justify-content-center">
-                    <ul v-for="plan in planes"  v-bind:key="plan">  <div class="row gx-5 justify-content-center">
                     <div class="col-lg-6 col-xl-4">
                         <div class="card mb-5 mb-xl-0">
-                            <div class="card-body p-5"><h3>{{plan.nombre}}</h3>
-                            
-                             
-                                         <div class="mb-3">
-                                    <span class="display-4 fw-bold">{{plan.precio}}</span>
+                            <div class="card-body p-5">
+                                <div class="small text-uppercase fw-bold text-muted">Free</div>
+                                <div class="mb-3">
+                                    <span class="display-4 fw-bold"> {{free}} </span>
                                     <span class="text-muted">/mes</span>
-                                </div> 
-                            <li v-for="item in plan.caracteristicas"  v-bind:key="item"> {{item}}</li> </div>
+                                </div>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        <p>1 users</p>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        1 Sitio Web
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        300 MB de Espacio En Disc
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Ancho de banda limitado (3 GB)
+                                    </li>
+
+                                </ul>
+                            </div>
                         </div>
-                    </div> 
-                </div></ul>
-                       
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card mb-5 mb-xl-0">
+                            <div class="card-body p-5">
+                                <div class="small text-uppercase fw-bold">
+                                    <i class="bi bi-star-fill text-warning"></i>
+                                    Pro
+                                </div>
+
+                                <div class="mb-3">
+                                    <span class="display-4 fw-bold">{{premium}}</span>
+                                    <span class="text-muted">/mes</span>
+                                </div>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        <p>30 GB de Espacio En Disco</p>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        5GB storage
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Atención 24/7/365
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Ancho de banda Limitado (100 GB)
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        1 Cuenta de correo electrónico
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card">
+                            <div class="card-body p-5">
+                                <div class="small text-uppercase fw-bold text-muted">Enterprise</div>
+                                <div class="mb-3">
+                                    <span class="display-4 fw-bold">{{enterprise}}</span>
+                                    <span class="text-muted">/mes</span>
+                                </div>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        <p>Sitios Web Ilimitados</p>
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        100 GB de Espacio En Disco
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Ancho de banda Ilimitado
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        100 Cuentas de Correo
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Atención 24/7/365
+                                    </li>
+                                    <li class="mb-2">
+                                        <i class="bi bi-check text-primary"></i>
+                                        Dominio Gratis
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -143,12 +233,13 @@
 
 <script>
     import {
-        getFirestore
+        getFirestore,
+
     } from "firebase/firestore";
     import 'babel-polyfill';
     import {
-        getPlanes
-    } from '../../services/firebase.js'
+        getPrices
+    } from '../services/firebase.js'
     import {
         onMounted,
         ref
@@ -158,18 +249,36 @@
     export default {
         name: "Home",
         setup() {
-             
-            const planes = ref({
-         
-    }); 
+            /*const free = ref([]);
             onMounted(async () => {
-                const res = await getPlanes(db)
-                planes.value = res 
-                console.log(planes.value);
+                const res = await getPrices(db)
+                free.value = res
+                console.log(free);
+            });
+            const premium = ref([]);
+            onMounted(async () => {
+                const res = await getPrices2(db)
+                premium.value = res
+                console.log(premium);
+            });
 
+            const enterprise = ref([]);
+            onMounted(async () => {
+                const res = await getPrices3(db)
+                enterprise.value = res
+                console.log(enterprise);
+            });*/
+            const free = ref([]);
+            const premium = ref([]);
+            const enterprise = ref([]);
+            onMounted(async () => {
+                const res = await getPrices(db)
+                console.log(res);
             });
             return {
-               planes
+                premium,
+                free,
+                enterprise
             };
         }
     }
@@ -178,10 +287,5 @@
     #logo {
         color: #093eae;
         font-weight: 700;
-    }
-
-    .options {
-        display: flex;
-        align-items: baseline;
     }
 </style>
