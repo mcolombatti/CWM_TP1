@@ -19,6 +19,8 @@
                         > 
                         <li class="nav-item">
                             <router-link class="nav-link" to="/chat">Chat</router-link>
+                        </li><li class="nav-item">
+                            <router-link class="nav-link" to="/panel">Panel</router-link>
                         </li><li class="nav-item pr-5">
                                 <router-link class="nav-link" to="/perfil">Perfil</router-link>
                             </li>

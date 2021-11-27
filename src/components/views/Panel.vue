@@ -1,57 +1,86 @@
 <template>
-     <div class="vista-container"> 
-       <div>
-           <section id="section-register" class="mb-5 container">
-               <h1>Panel</h1>
-               <form
-        @submit.prevent="handleSubmit"
-    >
-        <div class="mb-3">
-            <label for="nombre" class="form-label">nombre</label>
-            <input
-                type="nombre"
-                id="nombre"
-                class="form-control"
-                v-model="form.nombre"
-            >
-        </div>
-      
-        <button type="submit" class="btn btn-primary">publicar</button>
-    </form>
-           
-           </section>
-       </div>
-</div>
+    <div>
+     
+        <section class="bg-light py-5 border-bottom">
+            <div class="container px-5 my-5">
+                <div class="text-center mb-5">
+                    <h1 class="fw-bolder">Panel de Administrador</h1>
+                    <h2>Planes de Suscripcion</h2>
+                </div>
+               
+                              <ul v-for="plan in planes"  v-bind:key="plan">  <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card mb-5 mb-xl-0">
+                            <div class="card-body p-5"><h3>{{plan.nombre}}</h3><li > {{plan.precio}}</li><li > {{plan.correo}}</li> </div>
+                        </div>
+                    </div> 
+                </div></ul>
+                           
+            </div>
+        </section> 
+    </div>
 </template>
 
 <script>
+    import {
+        getFirestore
+    } from "firebase/firestore";
+    import 'babel-polyfill';
+    import {
+        getPrices
+    } from '../../services/firebase.js'
+    import {
+        onMounted,
+        ref,
+    } from "vue";
 
-import {ref} from "vue";
-import {publicar} from "../../services/panel.js";
-export default {
-    name: "Panel",
-    setup() {
-        const form = ref({
-            nombre: '', 
-        });
+    const db = getFirestore();
+    export default {
+        name: "Home",
+        setup() {
+            // const free = ref([]);
+            // onMounted(async () => {
+            //     const res = await getPrices(db)
+            //     free.value = res
+            //     console.log(free);
+            // });
+            // const premium = ref([]);
+            // onMounted(async () => {
+            //     const res = await getPrices2(db)
+            //     premium.value = res
+            //     console.log(premium);
+            // });
 
-        const handleSubmit = () => {
-            publicar(form.value.nombre)
-                .then(() => {
-                    form.value = {
-                        nombre: '',
-                    }
-                });
-        }
+            // const enterprise = ref([]);
+            // onMounted(async () => {
+            //     const res = await getPrices3(db)
+            //     enterprise.value = res
+            //     console.log(enterprise);
+            // });
+            const planes = ref({
+         
+    });
+       // const planes = ref([]); 
+            onMounted(async () => {
+                const res = await getPrices(db)
+                planes.value = res 
+                console.log(planes.value);
 
-        return {
-            form,
-            handleSubmit,
+            });
+            return {
+               planes
+            };
         }
     }
-};
 </script>
-
 <style>
+    #logo {
+        color: #093eae;
+        font-weight: 700;
+    }
 
+    .options {
+        display: flex;
+        align-items: baseline;
+    }
 </style>

@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'materialize-css';
 import './services/firebase.js';
 import {createApp} from "vue"; 
 

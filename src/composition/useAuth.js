@@ -12,6 +12,7 @@ export default () => {
     const authUser = ref({
         email: null,
         displayName: null,
+        rol:null
     });
     
     const unsubscribe = authStateSubscribe(user => authUser.value = user);
