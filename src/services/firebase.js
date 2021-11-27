@@ -44,8 +44,7 @@ const db = getFirestore();
 export async function getPrices(db) {
   const priceList = collection(db, 'pricing');
   const pricesSnapshot = await getDocs(priceList);
-  const test = {};
-  const pricesList = pricesSnapshot.forEach((doc) => {
+  const test = {}; pricesSnapshot.forEach((doc) => {
     test[doc.id] = doc.data();
   });
   return test

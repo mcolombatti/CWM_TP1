@@ -6,6 +6,7 @@ import Register from "../components/views/Register.vue";
 import Profile from "../components/views/Profile.vue"; 
 import ProfileUser from "../components/views/ProfileUser.vue"; 
 import ChatUser from "../components/views/ChatUser.vue";
+import Panel from "../components/views/Panel.vue";
 
 import {authStateSubscribe} from "../services/auth.js";
 const routes = [
@@ -63,6 +64,12 @@ const routes = [
         meta: {
             authRequired: true,
         }
+    },
+    {
+        name: 'panel',
+        component: Panel,
+        path: '/panel',
+       
     },
 ];
 const router = createRouter({
