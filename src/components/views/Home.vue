@@ -83,20 +83,25 @@
                         en tu servicio de Hosting</p>
                 </div>
                 <div class="row gx-5 justify-content-center">
-                    <ul v-for="plan in planes"  v-bind:key="plan">  <div class="row gx-5 justify-content-center">
+            <ul v-for="{ id, nombre, precio, caracteristicas } in planes" :key="id"> 
+                         <div class="row gx-5 justify-content-center">
                     <div class="col-lg-6 col-xl-4">
                         <div class="card mb-5 mb-xl-0">
-                            <div class="card-body p-5"><h3>{{plan.nombre}}</h3>
-                            
-                             
-                                         <div class="mb-3">
-                                    <span class="display-4 fw-bold">{{plan.precio}}</span>
+                            <div class="card-body p-5"><h3>{{nombre}}</h3>
+                             <div class="mb-3">
+                                    <span class="display-4 fw-bold">{{precio}}</span>
                                     <span class="text-muted">/mes</span>
                                 </div> 
-                            <li v-for="item in plan.caracteristicas"  v-bind:key="item"> {{item}}</li> </div>
+                                <p  v-for="item  in caracteristicas"  :key="item">{{item}}</p>
+                            <router-link :to="`/suscribe/${id}`">
+              <button class="btn btn-primary btn-sm me-2">
+                Suscribirse
+              </button>
+            </router-link> </div>
                         </div>
                     </div> 
-                </div></ul>
+                </div> 
+                </ul>
                        
                 </div>
             </div>
@@ -157,20 +162,21 @@
     const db = getFirestore();
     export default {
         name: "Home",
-        setup() {
+         setup() {
              
-            const planes = ref({
-         
-    }); 
+             
+            const planes = ref({     });     
+            
             onMounted(async () => {
-                const res = await getPlanes(db)
-                planes.value = res 
-                console.log(planes.value);
-
+                const res = await getPlanes(db) 
+                 
+                planes.value = res   
+                console.log(planes) 
             });
             return {
-               planes
+               planes 
             };
+            
         }
     }
 </script>
