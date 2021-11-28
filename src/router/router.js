@@ -8,6 +8,7 @@ import ProfileUser from "../components/views/ProfileUser.vue";
 import ChatUser from "../components/views/ChatUser.vue";
 import Create from "../components/views/Create.vue";
 import Panel from "../components/views/Panel.vue";
+import Edit from "../components/views/Edit.vue";
 
 import {authStateSubscribe} from "../services/auth.js";
 const routes = [
@@ -79,6 +80,15 @@ const routes = [
         name: 'create',
         component: Create,
         path: '/create',
+        meta: {
+            authRequired: true,
+        }
+       
+    },
+    {
+        name: 'edit',
+        component: Edit,
+        path: '/edit',
         meta: {
             authRequired: true,
         }

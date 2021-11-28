@@ -1,8 +1,8 @@
  
 import {
     getFirestore,
-    doc,
-    setDoc, Timestamp,
+    addDoc,collection,
+     Timestamp,
 } from "firebase/firestore";
  
 
@@ -13,12 +13,15 @@ const db = getFirestore();
  *
  * @param {string} nombre
  */
-export function publicar(nombre) {
+ export async function publicar(nombre, precio, caracteristicas) {
   
         
-    return setDoc(doc(db, 'pricing', nombre),{
-        nombre
-    })
+    const docRef = await addDoc(collection(db, "planes"), {
+        nombre: nombre,
+        precio: precio,
+        caracteristicas: [caracteristicas]
+      });
+      console.log("Document written with ID: ", docRef.id);
        
 }
  

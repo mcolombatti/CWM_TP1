@@ -1,6 +1,6 @@
 import {initializeApp} from "firebase/app"; 
 
-import {getFirestore,  collection, getDocs } from "firebase/firestore";
+import {getFirestore,  collection, getDocs, onSnapshot } from "firebase/firestore";
 import 'babel-polyfill';
 
   const app = initializeApp({
@@ -17,7 +17,7 @@ export async function getPlanes(db) {
   const priceList = collection(db, 'planes');
   const pricesSnapshot = await getDocs(priceList);
   const test = {}; pricesSnapshot.forEach((doc) => {
-    test[doc.id] = doc.data();
+    test[doc.id] = { id: doc.id, ...doc.data() }
   });
   return test
-} 
+}  

@@ -22,11 +22,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Actualizar</button>
                 </form>
-            <form action="#"
-                    id="price"
-                    @submit.prevent="setPrice"><input type="text"   > 
-                    <button type="submit" class="btn btn-primary">enviar</button></form>
-                <div id="profileConsole"></div>
+       
         </div>
     </div>
     </div>
@@ -68,24 +64,7 @@ export default {
             form,
             updateProfile,
         };
-    },
-    methods:
-    {
-        setPrice(db) {
-            db.collection("pricing").doc("Master").set({
-    price: 3000,
-   
-})
-.then(() => {
-    console.log("Document successfully written!");
-})
-.catch((error) => {
-    console.error("Error writing document: ", error);
-});
-  
-        }
-    },
-};
+    }}
 </script>
 
 <style>
