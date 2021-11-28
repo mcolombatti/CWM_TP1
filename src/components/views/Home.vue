@@ -21,7 +21,7 @@
             </div>
         </div>
         <!-- ACA DEBERIA TRAER LOS DATOS DE FIRESTORE--->
-<p>{{authUser}}</p>
+ 
         <section class="py-5 border-bottom" id="features">
             <div class="container px-5 my-5">
                 <div class="row gx-5">
@@ -95,7 +95,7 @@
                                 <p  v-for="item  in caracteristicas"  :key="item">{{item}}</p>
                             <form action="#"  
                 method="post"   
-                @submit.prevent="deleteUser(id)"> 
+                @submit.prevent="deleteUser(id, userId)"> 
                  <button  type="submit" class="btn btn-danger btn-sm"  >
              Suscribirse
             </button>
@@ -128,6 +128,7 @@
                                 </div>
                             </div>
                         </div>
+                        {{authUser.id}}
                         <div class="card">
                             <div class="card-body p-4">
                                 <div class="d-flex">
@@ -179,12 +180,10 @@ import useAuth from "../../composition/useAuth.js";
          |--------------------------------------------------------------------------
          */
         const users = ref({
-            
-        });
-
-        users.value.id = authUser.value.id;
-
-
+            id: null,
+        }); 
+ 
+      
             const planes = ref({     });      
             onMounted(async () => {
                 const res = await getPlanes(db)
@@ -195,10 +194,12 @@ import useAuth from "../../composition/useAuth.js";
                 
 
             });
-            const deleteUser = (id) => {
-              
-              console.log(users)
-              console.log(authUser.value)
+            const userId = authUser.value.id
+
+            const deleteUser = (id, userId ) => {
+               
+              console.log(userId)
+              console.log(id)
             publicar(id)
 
             }

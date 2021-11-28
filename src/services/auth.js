@@ -12,8 +12,7 @@ import {
     getFirestore,
     doc,
     setDoc, Timestamp,
-} from "firebase/firestore";
-
+} from "firebase/firestore"; 
 const auth = getAuth();
 
 const db = getFirestore();
@@ -30,8 +29,7 @@ onAuthStateChanged(auth, user => {
         userData = {
             email: user.email,
             displayName: user.displayName,
-            id: user.id,
-    plan: user.plan
+            id: user.uid 
         };
     } else {
         userData = {
