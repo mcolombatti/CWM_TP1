@@ -21,6 +21,8 @@ const db = getFirestore();
 let userData = {
     email: null,
     displayName: null,
+    id: null,
+    plan: null
 }
 
 onAuthStateChanged(auth, user => {
@@ -28,11 +30,15 @@ onAuthStateChanged(auth, user => {
         userData = {
             email: user.email,
             displayName: user.displayName,
+            id: user.id,
+    plan: user.plan
         };
     } else {
         userData = {
             email: null,
             displayName: null,
+            id: null,
+            plan: null
         };
     } 
     notifyAll();
@@ -107,7 +113,9 @@ export function register(email, password) {
             return setDoc(doc(db, 'users', credentials.user.uid), {
                 email,
                 displayName: null,
-                created_at: Timestamp.now()
+                created_at: Timestamp.now(),
+                plan: null,
+                id: credentials.user.uid
             });
         })
         .catch(err => {

@@ -21,3 +21,11 @@ export async function getPlanes(db) {
   });
   return test
 }  
+export async function getUserFromCollection(db) {
+  const priceList = collection(db, 'users');
+  const pricesSnapshot = await getDocs(priceList);
+  const test = {}; pricesSnapshot.forEach((doc) => {
+    test[doc.id] = { id: doc.id, ...doc.data() }
+  });
+  return test
+}  

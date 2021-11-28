@@ -21,7 +21,7 @@
             </div>
         </div>
         <!-- ACA DEBERIA TRAER LOS DATOS DE FIRESTORE--->
-
+<p>{{authUser}}</p>
         <section class="py-5 border-bottom" id="features">
             <div class="container px-5 my-5">
                 <div class="row gx-5">
@@ -93,16 +93,18 @@
                                     <span class="text-muted">/mes</span>
                                 </div> 
                                 <p  v-for="item  in caracteristicas"  :key="item">{{item}}</p>
-                            <router-link :to="`/suscribe/${id}`">
-              <button class="btn btn-primary btn-sm me-2">
-                Suscribirse
-              </button>
-            </router-link> </div>
+                            <form action="#"  
+                method="post"   
+                @submit.prevent="deleteUser(id)"> 
+                 <button  type="submit" class="btn btn-danger btn-sm"  >
+             Suscribirse
+            </button>
+            
+            </form > </div>
                         </div>
                     </div> 
                 </div> 
-                </ul>
-                       
+                </ul>          
                 </div>
             </div>
         </section>
@@ -146,14 +148,19 @@
     </div>
 </template>
 
-<script>
+<script> 
     import {
-        getFirestore
+        getFirestore, collection
     } from "firebase/firestore";
     import 'babel-polyfill';
     import {
-        getPlanes
+        getPlanes, getUserFromCollection
     } from '../../services/firebase.js'
+   import {
+        publicar
+    } from '../../services/suscribe.js'
+   
+import useAuth from "../../composition/useAuth.js";
     import {
         onMounted,
         ref
@@ -163,18 +170,44 @@
     export default {
         name: "Home",
          setup() {
-             
-             
-            const planes = ref({     });     
+              
+      const {authUser} = useAuth();
+
+        /*
+         |--------------------------------------------------------------------------
+         | Formulario
+         |--------------------------------------------------------------------------
+         */
+        const users = ref({
             
+        });
+
+        users.value.id = authUser.value.id;
+
+
+            const planes = ref({     });      
             onMounted(async () => {
-                const res = await getPlanes(db) 
-                 
-                planes.value = res   
-                console.log(planes) 
+                const res = await getPlanes(db)
+                const resUser = await getUserFromCollection(db) 
+                
+                planes.value = res    
+                users.value = resUser     
+                
+
             });
+            const deleteUser = (id) => {
+              
+              console.log(users)
+              console.log(authUser.value)
+            publicar(id)
+
+            }
+
+            
+             
             return {
-               planes 
+                planes,deleteUser,users,
+                 authUser
             };
             
         }
