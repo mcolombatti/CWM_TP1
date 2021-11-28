@@ -9,6 +9,7 @@ import ChatUser from "../components/views/ChatUser.vue";
 import Create from "../components/views/Create.vue";
 import Panel from "../components/views/Panel.vue";
 import Edit from "../components/views/Edit.vue";
+import Suscripcion from "../components/views/Suscripcion.vue";
 
 import {authStateSubscribe} from "../services/auth.js";
 const routes = [
@@ -89,6 +90,14 @@ const routes = [
         name: 'edit',
         component: Edit,
         path: '/edit',
+        meta: {
+            authRequired: true,
+        }
+       
+    },{
+        name: 'suscripciones',
+        component: Suscripcion,
+        path: '/perfil/suscripciones',
         meta: {
             authRequired: true,
         }

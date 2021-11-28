@@ -1,5 +1,28 @@
 <template>
-    <div><div class="vista-container"> 
+    <div class="sidebar">  <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+      <span class="fs-5">Hola {{ authUser.email }}!</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+    
+      <li class="nav-item">
+        <a href="#/perfil" class="nav-link active" aria-current="page">
+          
+          Mi cuenta
+        </a>
+      </li>
+      <li class="nav-item pr-5">
+
+   <router-link class="nav-link" to="/perfil/suscripciones">Suscripciones</router-link>
+                            </li>
+      
+      
+    </ul> 
+    
+  </div>
+    <div class="vista-container"> 
  
         <div>
             
@@ -68,5 +91,13 @@ export default {
 </script>
 
 <style>
-
+.sidebar{
+        display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    height: -webkit-fill-available;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
 </style>

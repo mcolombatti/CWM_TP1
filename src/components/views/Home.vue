@@ -21,7 +21,7 @@
             </div>
         </div>
         <!-- ACA DEBERIA TRAER LOS DATOS DE FIRESTORE--->
- 
+
         <section class="py-5 border-bottom" id="features">
             <div class="container px-5 my-5">
                 <div class="row gx-5">
@@ -83,28 +83,29 @@
                         en tu servicio de Hosting</p>
                 </div>
                 <div class="row gx-5 justify-content-center">
-            <ul v-for="{ id, nombre, precio, caracteristicas } in planes" :key="id"> 
-                         <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-6 col-xl-4">
-                        <div class="card mb-5 mb-xl-0">
-                            <div class="card-body p-5"><h3>{{nombre}}</h3>
-                             <div class="mb-3">
-                                    <span class="display-4 fw-bold">{{precio}}</span>
-                                    <span class="text-muted">/mes</span>
-                                </div> 
-                                <p  v-for="item  in caracteristicas"  :key="item">{{item}}</p>
-                            <form action="#"  
-                method="post"   
-                @submit.prevent="deleteUser(id, userId)"> 
-                 <button  type="submit" class="btn btn-danger btn-sm"  >
-             Suscribirse
-            </button>
-            
-            </form > </div>
-                        </div>
-                    </div> 
-                </div> 
-                </ul>          
+                    <ul class="row gx-5 justify-content-center">
+                        <li v-for="{ id, nombre, precio, caracteristicas } in planes" :key="id" class="col-lg-12 col-xl-4">
+                            
+                                <div >
+                                    <div class="card mb-5 mb-xl-0">
+                                        <div class="card-body p-5">
+                                            <h3>{{nombre}}</h3>
+                                            <div class="mb-3">
+                                                <span class="display-4 fw-bold">{{precio}}</span>
+                                                <span class="text-muted">/mes</span>
+                                            </div>
+                                            <p v-for="item  in caracteristicas" :key="item">{{item}}</p>
+                                            <form action="#" class=" d-flex justify-content-center" method="post" @submit.prevent="suscribe(id, userId)">
+                                                <button type="submit" class="mt-3  btn btn-success btn-sm">
+                                                    Suscribirse
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                             
+                        </li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -149,19 +150,21 @@
     </div>
 </template>
 
-<script> 
+<script>
     import {
-        getFirestore, collection
+        getFirestore,
+        collection
     } from "firebase/firestore";
     import 'babel-polyfill';
     import {
-        getPlanes, getUserFromCollection
+        getPlanes,
+        getUserFromCollection
     } from '../../services/firebase.js'
-   import {
+    import {
         publicar
     } from '../../services/suscribe.js'
-   
-import useAuth from "../../composition/useAuth.js";
+
+    import useAuth from "../../composition/useAuth.js";
     import {
         onMounted,
         ref
@@ -170,45 +173,40 @@ import useAuth from "../../composition/useAuth.js";
     const db = getFirestore();
     export default {
         name: "Home",
-         setup() {
-              
-      const {authUser} = useAuth();
+        setup() {
 
-        /*
-         |--------------------------------------------------------------------------
-         | Formulario
-         |--------------------------------------------------------------------------
-         */
-        const users = ref({
-            id: null,
-        }); 
- 
-      
-            const planes = ref({     });      
+            const {
+                authUser
+            } = useAuth();
+
+            /*
+             |--------------------------------------------------------------------------
+             | Formulario
+             |--------------------------------------------------------------------------
+             */
+            const users = ref({
+                id: null,
+            });
+            const planes = ref({});
             onMounted(async () => {
                 const res = await getPlanes(db)
-                const resUser = await getUserFromCollection(db) 
-                
-                planes.value = res    
-                users.value = resUser     
-                
-
+                const resUser = await getUserFromCollection(db)
+                planes.value = res
+                users.value = resUser
             });
-            const userId = authUser.value.id
-
-            const deleteUser = (id, userId ) => {
-               
-              console.log(userId)
-              console.log(id)
-            publicar(id)
+          
+            const suscribe = (id) => {
+                const userIds = authUser.value.id
+                
+                console.log(id)
+                publicar(id, userIds)
 
             }
-
-            
-             
             return {
-                planes,deleteUser,users,
-                 authUser
+                planes,
+                suscribe,
+                users,
+                authUser
             };
             
         }
