@@ -44,9 +44,11 @@
 import {ref} from "vue";
 import {publicar} from "../../services/create.js";
 import {useRouter} from "vue-router";
+  import { useToast } from "vue-toastification";
 export default {
     name: "Create",
     setup() {
+const toast = useToast();
         const router = useRouter();
         const form = ref({
             nombre: '',  
@@ -59,7 +61,9 @@ export default {
                     nombre: '',
                     precio: ''
                 }
-            }).then(()=>{
+            })
+             .then(toast.success("Plan creado exitosamente"))
+             .then(()=>{
                  router.push({
                     path: '/panel'
                 });

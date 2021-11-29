@@ -35,25 +35,24 @@
           </div>
           
     <div class="table-responsive">
+    
       <table class="table text-center">
         <thead>
           <tr>
             <th style="width: 34%;"></th>
-            <th style="width: 22%;">Free</th>
-            <th style="width: 22%;">Pro</th>
-            <th style="width: 22%;">Enterprise</th>
+            <th style="width: 22%;">{{nombrePlan}}</th> 
           </tr>
         </thead>
         <tbody>
           <tr>
-            <th scope="row" class="text-start">Public</th>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+            <th scope="row" class="text-start">Ancho de banda </th>
+            <td> {{caracteristicas[4]}}</td> 
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
           <tr>
-            <th scope="row" class="text-start">Private</th>
-            <td></td>
+            <th scope="row" class="text-start">Soporte</th>
+            <td>{{caracteristicas[0]}}</td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
@@ -61,35 +60,37 @@
 
         <tbody>
           <tr>
-            <th scope="row" class="text-start">Permissions</th>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+            <th scope="row" class="text-start">Espacio en Disco</th>
+            <td>{{caracteristicas[1]}}<svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
+                   </tr>
+          <tr>
+            <th scope="row" class="text-start">Sitios</th>
+            <td>{{caracteristicas[3]}}</td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
           <tr>
-            <th scope="row" class="text-start">Sharing</th>
-            <td></td>
+            <th scope="row" class="text-start">Cuentas correos</th>
+            <td>{{caracteristicas[2]}}</td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
             <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
           </tr>
-          <tr>
-            <th scope="row" class="text-start">Unlimited members</th>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-          <tr>
-            <th scope="row" class="text-start">Extra security</th>
-            <td></td>
-            <td></td>
-            <td><svg class="bi" width="24" height="24"><use xlink:href="#check"/></svg></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+               </tbody>
+      </table>  
+<div class="row d-flex ">
+  <div class="col-md-6 "> 
+    <form action="#" class=" d-flex justify-content-center" method="post" @submit.prevent="unsuscribe( userId)">   
+      <button   class="mt-3  btn btn-danger btn-sm">
+         Desuscribirse 
+
+      </button> </form>
+        </div>
+</div>
+      </div>
         </div>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -107,11 +108,16 @@
     getDoc
 
   } from "firebase/firestore";
+   import {
+        unsuscribeSuscription
+    } from '../../services/suscribe.js'
+
   import {
     onUnmounted,
     onMounted,
     ref
   } from "vue";
+  import { useToast } from "vue-toastification";
   const db = getFirestore();
 
   import useAuth from "../../composition/useAuth.js";
@@ -120,6 +126,7 @@
 
     setup() {
 
+const toast = useToast();
       const {
         authUser
       } = useAuth();
@@ -131,6 +138,12 @@
        */
       const form = ref({
         displayName: null,
+      });
+      const caracteristicas = ref({
+        
+      });
+      const nombrePlan = ref({
+        
       });
 
       form.value.displayName = authUser.value.displayName;
@@ -146,20 +159,34 @@
 
         const docRef = doc(db, "users", userIds);
         const docSnap = await getDoc(docRef);
+        
 
         console.log("Document data:", docSnap.data().plan);
         const planUser = docSnap.data().plan
         const docRefPlan = doc(db, "planes", planUser);
         const docPlanSnap = await getDoc(docRefPlan);
 
-        console.log("Document data:", docPlanSnap.data());
-
+        console.log("Document data:", docPlanSnap.data().caracteristicas);
+        console.log("Document data:", docPlanSnap.data().nombre);
+          caracteristicas.value = docPlanSnap.data().caracteristicas 
+          nombrePlan.value = docPlanSnap.data().nombre 
       });
-
+       const unsuscribe = () => {
+            unsuscribeSuscription(userIds)
+            
+                .then(() => {
+                    toast.success(`Te desuscribiste del Plan ${nombrePlan.value}`)
+                })
+                .then(() => {
+                    nombrePlan.value =  ''
+                    caracteristicas.value = ''
+                }) 
+        }
+ 
       return {
         authUser,
         form,
-        updateProfile
+        updateProfile, caracteristicas,nombrePlan, unsuscribe
       };
     }
   }

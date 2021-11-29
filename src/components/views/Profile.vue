@@ -58,12 +58,14 @@ import {setPrices} from "../../services/firebase.js";
         getFirestore,
 
     } from "firebase/firestore";
+  import { useToast } from "vue-toastification";
 import {onUnmounted, ref} from "vue"; const db = getFirestore();
 import useAuth from "../../composition/useAuth.js";
 export default {
     name: "Profile", 
     
     setup() {
+const toast = useToast();
      
         const {authUser} = useAuth();
 
@@ -79,7 +81,8 @@ export default {
         form.value.displayName = authUser.value.displayName;
 
         function updateProfile() {
-            updateUserProfile(form.value);
+            updateUserProfile(form.value)
+             .then(     toast.success("Modificación Exitosa"),)
         }
 
         return {

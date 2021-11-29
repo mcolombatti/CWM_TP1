@@ -129,7 +129,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{authUser.id}}
+                     
                         <div class="card">
                             <div class="card-body p-4">
                                 <div class="d-flex">
@@ -169,12 +169,13 @@
         onMounted,
         ref
     } from "vue";
+  import { useToast } from "vue-toastification";
 
     const db = getFirestore();
     export default {
         name: "Home",
         setup() {
-
+const toast = useToast();
             const {
                 authUser
             } = useAuth();
@@ -200,6 +201,7 @@
                 
                 console.log(id)
                 publicar(id, userIds)
+                .then(     toast.success("Suscripción Exitosa"),)
 
             }
             return {
