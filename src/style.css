@@ -1,11 +1,15 @@
 html, body, #root {
   height: 100%;
 }
-
+li{
+  list-style: none;}
 #root {
   display: grid;
   grid-template-rows: 58px 1fr 100px;
+text-decoration: none;
+
 } 
+
 .vista-container{
   height: 100vh;
   display: flex;

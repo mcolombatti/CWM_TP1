@@ -8,6 +8,7 @@ import ProfileUser from "../components/views/ProfileUser.vue";
 import ChatUser from "../components/views/ChatUser.vue";
 import Create from "../components/views/Create.vue";
 import Panel from "../components/views/Panel.vue";
+import UsersPlans from "../components/views/UsersPlans.vue";
 import Edit from "../components/views/Edit.vue";
 import Suscripcion from "../components/views/Suscripcion.vue";
 
@@ -78,6 +79,15 @@ const routes = [
        
     },
     {
+        name: 'users-plans',
+        component: UsersPlans,
+        path: '/panel/users-plans',
+        meta: {
+            authRequired: true,
+        }
+       
+    },
+    {
         name: 'create',
         component: Create,
         path: '/create',
@@ -87,14 +97,13 @@ const routes = [
        
     },
     {
+        path: '/edit/:id',
         name: 'edit',
         component: Edit,
-        path: '/edit',
-        meta: {
+           meta: {
             authRequired: true,
         }
-       
-    },{
+      },{
         name: 'suscripciones',
         component: Suscripcion,
         path: '/perfil/suscripciones',

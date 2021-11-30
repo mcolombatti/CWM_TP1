@@ -157,8 +157,7 @@
     } from "firebase/firestore";
     import 'babel-polyfill';
     import {
-        getPlanes,
-        getUserFromCollection
+        getPlanes,getUsersFromCollection
     } from '../../services/firebase.js'
     import {
         publicar
@@ -191,7 +190,7 @@ const toast = useToast();
             const planes = ref({});
             onMounted(async () => {
                 const res = await getPlanes(db)
-                const resUser = await getUserFromCollection(db)
+                const resUser = await getUsersFromCollection(db)
                 planes.value = res
                 users.value = resUser
             });
