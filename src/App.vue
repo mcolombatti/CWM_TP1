@@ -21,9 +21,12 @@
                             <router-link class="nav-link" to="/chat">Chat</router-link>
                         </li><li class="nav-item">
                             <router-link class="nav-link" to="/panel">Panel</router-link>
-                        </li><li class="nav-item pr-5">
+                        </li> <template
+                            v-if="authUser.email !== null"
+                        > <li class="nav-item pr-5">
                                 <router-link class="nav-link" to="/perfil">Perfil</router-link>
                             </li>
+                        </template>
                             <li class="nav-item px-3">
                                 <button
                                     type="button"
@@ -60,17 +63,21 @@
 </template>
 
 <script>
-import {authStateSubscribe, logout} from "./services/auth.js";
-import {ref} from "vue";
+import {authStateSubscribe, logout} from "./services/auth.js"; 
 import {useRouter} from "vue-router";
 import useAuth from "./composition/useAuth.js";
-
+  import {
+        onMounted,
+        ref
+    } from "vue";
 export default {
     name: "App",
       setup() {
        
-        const {authUser} = useAuth();
-
+        const {authUser} = useAuth(); 
+            onMounted(async () => {
+                console.log(authUser)
+            });
         const router = useRouter();
 
         function doLogout() {

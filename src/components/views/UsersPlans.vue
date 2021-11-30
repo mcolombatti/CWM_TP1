@@ -1,45 +1,63 @@
 <template>
-    
-        <div class="sidebar">
-            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
-                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-                    <svg class="bi me-2" width="40" height="32">
-                        <use xlink:href="#bootstrap" /></svg>
-                    <span class="fs-5">Hola {{ authUser.email }}!</span>
-                </a>
-                <hr>
-                <ul class="nav nav-pills flex-column mb-auto">
 
-                    <li class="nav-item">
-                        <a href="#/panel" class="nav-link " aria-current="page">
-                            Plans
-                        </a>
-                    </li>
-                    <li class="nav-item pr-5">
+    <div class="sidebar">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+                <svg class="bi me-2" width="40" height="32">
+                    <use xlink:href="#bootstrap" /></svg>
+                <span class="fs-5">Hola {{ authUser.email }}!</span>
+            </a>
+            <hr>
+            <ul class="nav nav-pills flex-column mb-auto">
 
-                        <router-link class="nav-link active" to="/panel/users-plans">Users List</router-link>
-                    </li>
+                <li class="nav-item">
+                    <a href="#/panel" class="nav-link " aria-current="page">
+                        Planes
+                    </a>
+                </li>
+                <li class="nav-item pr-5">
+
+                    <router-link class="nav-link active" to="/panel/users-plans">Planes de Usuarios</router-link>
+                </li>
 
 
-                </ul>
+            </ul>
 
-            </div> 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <section class="   users-plan border-bottom">
-                            <div class="container px-5 my-5">
-                                <div class="text-center mb-5">
-                                    <h1 class="fw-bolder">Panel de Administrador</h1>
-                                    <p class="lead mb-0">Planes de Suscripcion</p>
-                                </div>
-                        
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="   users-plan border-bottom">
+                        <div class="container px-5 my-5">
+                            <div class="text-center mb-5">
+                                <h1 class="fw-bolder">Panel de Administrador</h1>
+                                <p class="lead mb-0">Planes de Suscripcion</p>
                             </div>
-                        </section>
-                    </div>
+                            
+  <table class="table m-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Plan</th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="{ id, email, plan, displayName } in users" :key="id">
+                                    <td>{{ displayName }}</td>
+                                    <td>{{ email }}</td>
+                                    <td>{{ plan }}</td>
+                                   
+                                </tr>
+                            </tbody>
+                        </table>
+                                
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
+    </div>
 </template>
 
 <script>
@@ -60,7 +78,7 @@
     export default {
         name: "UsersPlans",
         setup() {
-   const {
+            const {
                 authUser
             } = useAuth();
 
@@ -78,8 +96,7 @@
 
 
             const planes = ref({});
-            const users = ref({});
-
+            const users = ref({ }); 
             onMounted(async () => {
                 const res = await getPlanes(db)
 
@@ -91,8 +108,9 @@
                 console.log(users)
             });
             return {
-                planes,authUser,
-                form
+                planes,
+                authUser,
+                form, users
             };
 
         }
@@ -103,9 +121,11 @@
         color: #093eae;
         font-weight: 700;
     }
-.users-plan{
+
+    .users-plan {
         min-height: 100vh;
-}
+    }
+
     .options {
         display: flex;
         align-items: baseline;

@@ -38,7 +38,7 @@
                             </div>
                             <div class="form-group mt-3">
                                 <label>Caracteristicas</label>
-                                <input v-model="formEdit.caracteristicas" class="form-control" type="text" required />
+                                <input v-model="formEdit.caracteristicas[0]" class="form-control"   /> 
                             </div>
                             <button type="submit" class="btn btn-primary  mt-3">
                                 Update
@@ -101,7 +101,7 @@ import { useRoute, useRouter } from 'vue-router'
             const formEdit = reactive({
                 nombre: '',
                 precio: '',
-                caracteristicas: ''
+                caracteristicas: []
             })
 
 
@@ -109,7 +109,21 @@ import { useRoute, useRouter } from 'vue-router'
                 await updatePlan(planId.value, {
                     ...formEdit
                 })
-                router.push('/#/panel')
+                .then(
+                        toast.success("Plan editado exitosamente")
+                    )
+                    .then(() => {
+                        router.push({
+                                path: '/panel'
+                            })
+                            .catch(err => {
+
+                                toast.error("No pudimos editar el plan")
+                                console.error("Error al editar el plan: ", err);
+                            });
+                    })
+                console.log(formEdit.caracteristicas)
+                router.push('/panel')
                 formEdit.nombre = ''
                 formEdit.precio = ''
                 formEdit.caracteristicas = ''

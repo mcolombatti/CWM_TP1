@@ -12,12 +12,12 @@
 
                 <li class="nav-item">
                     <a href="#/panel" class="nav-link active" aria-current="page">
-                        Plans
+                        Planes
                     </a>
                 </li>
                 <li class="nav-item pr-5">
 
-                    <router-link class="nav-link" to="/panel/users-plans">Users List</router-link>
+                    <router-link class="nav-link" to="/panel/users-plans">Planes de Usuarios</router-link>
                 </li>
 
 

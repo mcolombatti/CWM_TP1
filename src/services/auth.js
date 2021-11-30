@@ -21,7 +21,8 @@ let userData = {
     email: null,
     displayName: null,
     id: null,
-    plan: null
+    plan: null,
+    role: null
 }
 
 onAuthStateChanged(auth, user => {
@@ -29,7 +30,8 @@ onAuthStateChanged(auth, user => {
         userData = {
             email: user.email,
             displayName: user.displayName,
-            id: user.uid 
+            id: user.uid, 
+            role: null
         };
     } else {
         userData = {
@@ -113,6 +115,7 @@ export function register(email, password) {
                 displayName: null,
                 created_at: Timestamp.now(),
                 plan: null,
+                role: null,
                 id: credentials.user.uid
             });
         })

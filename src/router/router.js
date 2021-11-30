@@ -83,7 +83,7 @@ const routes = [
         component: UsersPlans,
         path: '/panel/users-plans',
         meta: {
-            authRequired: true,
+            authRequired: true
         }
        
     },
@@ -126,12 +126,22 @@ const router = createRouter({
 let authUser = {
     email: null,
     displayName: null,
+    role: null
 }
 
 authStateSubscribe(user => authUser = user);
 
 router.beforeEach((to) => {
     if(to.meta.authRequired && authUser.email === null) {
+        // Si retornamos un objeto, Vue Router va a redireccionar a esa ruta.
+        return {
+            path: '/iniciar-sesion',
+            query: {
+                redirect: to.fullPath
+            }
+        }
+    }
+    if(to.meta.adminRequired && authUser.role != 'admin') {
         // Si retornamos un objeto, Vue Router va a redireccionar a esa ruta.
         return {
             path: '/iniciar-sesion',
