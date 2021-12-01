@@ -8,25 +8,22 @@
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-
                 <li class="nav-item">
                     <a href="#/panel" class="nav-link active" aria-current="page">
-                        Plans
+                        Planes
                     </a>
                 </li>
                 <li class="nav-item pr-5">
 
-                    <router-link class="nav-link" to="/panel/users-plans">Users List</router-link>
+                    <router-link class="nav-link" to="/panel/users-plans">Planes de Usuarios</router-link>
                 </li>
-
-
             </ul>
         </div>
         <div class="container height-main">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card card-body mt-4 ">
-                        <h3>Edit users</h3>
+                        <h3>Editar Planes</h3>
                         <form @submit.prevent="update">
                             <div class="form-group">
                                 <label>Nombre</label>
@@ -38,10 +35,10 @@
                             </div>
                             <div class="form-group mt-3">
                                 <label>Caracteristicas</label>
-                                <input v-model="formEdit.caracteristicas[0]" class="form-control"   /> 
+                                <input v-model="formEdit.caracteristicas[0]" class="form-control" />
                             </div>
                             <button type="submit" class="btn btn-primary  mt-3">
-                                Update
+                                Actualizar
                             </button>
                         </form>
                     </div>
@@ -72,8 +69,11 @@
     import {
         useToast
     } from "vue-toastification";
-    
-import { useRoute, useRouter } from 'vue-router'
+
+    import {
+        useRoute,
+        useRouter
+    } from 'vue-router'
     const db = getFirestore();
     export default {
         name: "Edit",
@@ -81,35 +81,25 @@ import { useRoute, useRouter } from 'vue-router'
             const {
                 authUser
             } = useAuth();
- const router = useRouter()
-    const route = useRoute()
+            const router = useRouter()
+            const route = useRoute()
             const toast = useToast();
-            /*
-             |--------------------------------------------------------------------------
-             | Formulario
-             |--------------------------------------------------------------------------
-             */
             const form = ref({
                 displayName: null,
             });
-
             form.value.displayName = authUser.value.displayName;
-
             const planes = ref({});
             const planId = computed(() => route.params.id)
-
             const formEdit = reactive({
                 nombre: '',
                 precio: '',
                 caracteristicas: []
             })
-
-
             const update = async () => {
                 await updatePlan(planId.value, {
-                    ...formEdit
-                })
-                .then(
+                        ...formEdit
+                    })
+                    .then(
                         toast.success("Plan editado exitosamente")
                     )
                     .then(() => {
@@ -132,14 +122,16 @@ import { useRoute, useRouter } from 'vue-router'
                 const plans = await getPlan(planId.value)
                 console.log(plans, planId.value)
                 formEdit.nombre = plans.nombre
-                formEdit.precio = plans.precio 
-                formEdit.caracteristicas = plans.caracteristicas 
+                formEdit.precio = plans.precio
+                formEdit.caracteristicas = plans.caracteristicas
                 console.log(plans.value)
             });
             return {
                 planes,
                 authUser,
-                form,formEdit, update
+                form,
+                formEdit,
+                update
             };
 
         }

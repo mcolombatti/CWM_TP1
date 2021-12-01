@@ -9,7 +9,6 @@
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
-
                 <li class="nav-item">
                     <a href="#/panel" class="nav-link active" aria-current="page">
                         Planes
@@ -19,17 +18,15 @@
 
                     <router-link class="nav-link" to="/panel/users-plans">Planes de Usuarios</router-link>
                 </li>
-
-
             </ul>
         </div>
-        <div class="container">
+        <div class="container ">
             <div class="row">
-                <div class="col-md-2"> <router-link class="btn btn-success btn-sm " to="/create">Crear Plan</router-link></div>
-                <div class="col-md-12">
-                    
-                    <div class="card mt-4">
-                         
+                <div class="col-md-2 mt-5">
+                    <router-link class="btn btn-success btn-sm " to="/create">Crear Plan</router-link>
+                </div>
+                <div class="col-md-12 mb-5">
+                    <div class="card mt-4 ">
                         <table class="table m-0">
                             <thead>
                                 <tr>
@@ -49,14 +46,16 @@
                                         <p v-for="item  in caracteristicas" :key="item">{{item}}</p>
                                     </td>
                                     <td>
-                                        <router-link :to="`/edit/${id}`">
-                                            <button class="btn btn-primary btn-sm me-2">
+                                        <form action="#" method="post" @submit.prevent>
+                                            <router-link class="btn btn-primary btn-sm me-2 mb-2" :to="`/edit/${id}`">
                                                 Editar
-                                            </button>
-                                        </router-link>
-                                        <button class="btn btn-danger btn-sm" @click="deleteAction(id)">
-                                            Eliminar
-                                        </button>
+                                            </router-link>
+                                        </form>
+                                        <form action="#" method="post" @submit.prevent>
+                                            <button type="submit" class="mt-2 btn btn-danger btn-sm"
+                                                @click="deleteAction(id)">
+                                                Eliminar
+                                            </button></form>
                                     </td>
                                 </tr>
                             </tbody>
@@ -65,41 +64,6 @@
                 </div>
             </div>
         </div>
-        <!--
-        <div class="vista-container">
-            <div class="container">
-
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <div class="text-center mb-5">
-                            <h1 class="fw-bolder">Panel de Administrador</h1>
-                            <p class="lead mb-0">Planes de Suscripcion</p>
-                        </div>
-                    </div>
-                    <ul class="row gx-5 justify-content-center">
-
-                        <li v-for="{ id, nombre, precio, caracteristicas } in planes" :key="id">
-                            <div>
-                                <div class="col-lg-6 col-xl-4">
-                                    <div class="card mb-5 mb-xl-0">
-                                        <div class="card-body p-5">
-                                            <h3>{{nombre}}</h3>
-                                            <div class="mb-3">
-                                                <span class="display-4 fw-bold">{{precio}}</span>
-                                                <span class="text-muted">/mes</span>
-                                            </div>
-                                            <p v-for="item  in caracteristicas" :key="item">{{item}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </div>
--->
     </div>
 </template>
 
@@ -129,46 +93,28 @@
             const {
                 authUser
             } = useAuth();
-
             const toast = useToast();
-            /*
-             |--------------------------------------------------------------------------
-             | Formulario
-             |--------------------------------------------------------------------------
-             */
             const form = ref({
                 displayName: null,
             });
-
             form.value.displayName = authUser.value.displayName;
-
             const deleteAction = (id) => {
-
-                deletePlan(id)
+                if (confirm("¿Estas seguro que deseas eliminar el plan"))
+                    deletePlan(id)
                     .then(async () => {
-                        
-                            const res = await getPlanes(db)
-
-                            planes.value = res
-                        
-                        
+                        const res = await getPlanes(db)
+                        planes.value = res
                         toast.success("Eliminacion Exitosa")
                     })
                     .catch(err => {
-
                         toast.error("No pudimos eliminar el plan")
                         console.error("Error al eliminar el plan: ", err);
                     });
-
             }
-
             const planes = ref({});
-
             onMounted(async () => {
                 const res = await getPlanes(db)
-
                 planes.value = res
-                console.log(planes)
             });
             return {
                 planes,
@@ -176,7 +122,6 @@
                 form,
                 deleteAction
             };
-
         }
     }
 </script>

@@ -5,7 +5,6 @@
                 <div class="row gx-5 justify-content-center">
                     <div class="col-lg-9">
                         <div class="text-center my-5">
-
                             <h1 class="display-8 pb-5 fw-bolder text-white mb-2">Da Vinci Hosting, ofrecemos el mejor
                                 servicio segun tus necesidades</h1>
                             <p class="lead text-white-50 mb-4">Necesitas un servicio de hosting web potente. Nuestras
@@ -20,8 +19,6 @@
                 </div>
             </div>
         </div>
-        <!-- ACA DEBERIA TRAER LOS DATOS DE FIRESTORE--->
-
         <section class="py-5 border-bottom" id="features">
             <div class="container px-5 my-5">
                 <div class="row gx-5">
@@ -41,7 +38,6 @@
                         <p class="text-h-gray paragraph fw-400">Hacé que tu sitio web esté online de forma fácil, solo
                             deberás hacer un clic. Todo lo que buscas en un servicio de alojamiento, ofrecido de una
                             forma clara.</p>
-
                     </div>
                     <div class="col-lg-4">
                         <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
@@ -84,18 +80,21 @@
                 </div>
                 <div class="row gx-5 justify-content-center">
                     <ul class="row gx-5 justify-content-center">
-                        <li v-for="{ id, nombre, precio, caracteristicas } in planes" :key="id" class="col-lg-12 col-xl-4">
-                            
-                                <div >
-                                    <div class="card mb-5 mb-xl-0">
-                                        <div class="card-body p-5">
-                                            <h3>{{nombre}}</h3>
-                                            <div class="mb-3">
-                                                <span class="display-4 fw-bold">{{precio}}</span>
-                                                <span class="text-muted">/mes</span>
-                                            </div>
-                                            <p v-for="item  in caracteristicas" :key="item">{{item}}</p>
-                                            <form action="#" class=" d-flex justify-content-center" method="post" @submit.prevent="suscribe(id, userId)">
+                        <li v-for="{ id, nombre, precio, caracteristicas } in planes" :key="id"
+                            class="col-lg-12 col-xl-4">
+
+                            <div>
+                                <div class="card mb-5 mb-xl-0">
+                                    <div class="card-body p-5">
+                                        <h3>{{nombre}}</h3>
+                                        <div class="mb-3">
+                                            <span class="display-4 fw-bold">$ {{precio}}</span>
+                                            <span class="text-muted">/mes</span>
+                                        </div>
+                                        <p v-for="item  in caracteristicas" :key="item">{{item}}</p>
+                                        <div  v-if="authUser.email !== null">
+                                            <form action="#" class=" d-flex justify-content-center" method="post"
+                                                @submit.prevent="suscribe(id, userId)">
                                                 <button type="submit" class="mt-3  btn btn-success btn-sm">
                                                     Suscribirse
                                                 </button>
@@ -103,7 +102,8 @@
                                         </div>
                                     </div>
                                 </div>
-                             
+                            </div>
+
                         </li>
                     </ul>
                 </div>
@@ -129,7 +129,7 @@
                                 </div>
                             </div>
                         </div>
-                     
+
                         <div class="card">
                             <div class="card-body p-4">
                                 <div class="d-flex">
@@ -157,10 +157,11 @@
     } from "firebase/firestore";
     import 'babel-polyfill';
     import {
-        getPlanes,getUsersFromCollection
+        getPlanes,
+        getUsersFromCollection
     } from '../../services/firebase.js'
     import {
-        publicar
+        addSuscription
     } from '../../services/suscribe.js'
 
     import useAuth from "../../composition/useAuth.js";
@@ -168,22 +169,18 @@
         onMounted,
         ref
     } from "vue";
-  import { useToast } from "vue-toastification";
+    import {
+        useToast
+    } from "vue-toastification";
 
     const db = getFirestore();
     export default {
         name: "Home",
         setup() {
-const toast = useToast();
+            const toast = useToast();
             const {
                 authUser
             } = useAuth();
-
-            /*
-             |--------------------------------------------------------------------------
-             | Formulario
-             |--------------------------------------------------------------------------
-             */
             const users = ref({
                 id: null,
             });
@@ -194,14 +191,11 @@ const toast = useToast();
                 planes.value = res
                 users.value = resUser
             });
-          
             const suscribe = (id) => {
                 const userIds = authUser.value.id
-                
                 console.log(id)
-                publicar(id, userIds)
-                .then(     toast.success("Suscripción Exitosa"),)
-
+                addSuscription(id, userIds)
+                    .then(toast.success("Suscripción Exitosa"), )
             }
             return {
                 planes,
@@ -209,7 +203,6 @@ const toast = useToast();
                 users,
                 authUser
             };
-            
         }
     }
 </script>

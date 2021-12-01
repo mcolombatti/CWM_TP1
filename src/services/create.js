@@ -12,6 +12,8 @@ const db = getFirestore();
  * Publica un plan
  *
  * @param {string} nombre
+ * @param {string} precio
+ * @param {string} caracteristicas
  */
  export async function publicar(nombre, precio, caracteristicas) {
   

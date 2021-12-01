@@ -12,9 +12,8 @@ export default {
             type: String,
             required: true,
         }
-    },
-    // Las props en la API de Composition llegan como el primer parámetro del setup.
-    setup(props) {
+    }, 
+     setup(props) {
         const email = props.email;
 
         return {

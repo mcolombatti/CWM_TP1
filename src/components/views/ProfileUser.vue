@@ -12,8 +12,7 @@ import {useRoute} from "vue-router";
 export default {
     name: "ProfileUser",
     setup() {
-        // useRoute() es la función de composición para obtener los datos de la ruta de Vue Router.
-        // Es el equivalente a this.$route en la Options API.
+      
         const route = useRoute();
 
         const email = route.params.email;

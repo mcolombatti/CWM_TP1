@@ -10,12 +10,12 @@
 
                 <li class="nav-item">
                     <a href="#/panel" class="nav-link active" aria-current="page">
-                        Plans
+                        Planes
                     </a>
                 </li>
                 <li class="nav-item pr-5">
 
-                    <router-link class="nav-link" to="/panel/users-plans">Users List</router-link>
+                    <router-link class="nav-link" to="/panel/users-plans">Planes de Usuarios</router-link>
                 </li>
 
 
@@ -28,15 +28,15 @@
                 <form @submit.prevent="handleSubmit">
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" v-model="form.nombre">
+                        <input type="text" name="nombre" class="form-control" v-model="form.nombre">
                     </div>
                     <div class="mb-3">
                         <label for="precio" class="form-label">Precio</label>
-                        <input type="number" class="form-control" v-model="form.precio">
+                        <input type="number"  name="precio" class="form-control" v-model="form.precio">
                     </div>
                     <div class="mb-3">
                         <label for="caracteristicas" class="form-label">caracteristicas</label>
-                        <input type="text" class="form-control" v-model="form.caracteristicas">
+                        <input type="text" name="caracteristicas" class="form-control" v-model="form.caracteristicas">
                     </div>
 
                     <button type="submit" class="btn btn-primary">publicar</button>

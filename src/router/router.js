@@ -11,6 +11,8 @@ import Panel from "../components/views/Panel.vue";
 import UsersPlans from "../components/views/UsersPlans.vue";
 import Edit from "../components/views/Edit.vue";
 import Suscripcion from "../components/views/Suscripcion.vue";
+import Restricted from "../components/views/Restricted.vue";
+import Pricing from "../components/views/Pricing.vue";
 
 import {authStateSubscribe} from "../services/auth.js";
 const routes = [
@@ -33,9 +35,13 @@ const routes = [
         name: 'chat',
         component: Chat,
         path: '/chat',
-        meta: {
-          //  authRequired: true,
+        meta: { 
         }
+    },
+    {
+        name: 'pricing',
+        component: Pricing,
+        path: '/pricing'
     },
     {
         name: 'profile',
@@ -75,6 +81,7 @@ const routes = [
         path: '/panel',
         meta: {
             authRequired: true,
+            adminRequired: true
         }
        
     },
@@ -83,7 +90,8 @@ const routes = [
         component: UsersPlans,
         path: '/panel/users-plans',
         meta: {
-            authRequired: true
+            authRequired: true,
+            adminRequired: true
         }
        
     },
@@ -93,6 +101,7 @@ const routes = [
         path: '/create',
         meta: {
             authRequired: true,
+            adminRequired: true
         }
        
     },
@@ -102,14 +111,21 @@ const routes = [
         component: Edit,
            meta: {
             authRequired: true,
+            adminRequired: true
         }
       },{
         name: 'suscripciones',
         component: Suscripcion,
         path: '/perfil/suscripciones',
         meta: {
-            authRequired: true,
+            authRequired: true 
         }
+       
+    },{
+        name: 'Restricted',
+        component: Restricted,
+        path: '/restricted',
+         
        
     },
 ];
@@ -133,18 +149,16 @@ authStateSubscribe(user => authUser = user);
 
 router.beforeEach((to) => {
     if(to.meta.authRequired && authUser.email === null) {
-        // Si retornamos un objeto, Vue Router va a redireccionar a esa ruta.
-        return {
+         return {
             path: '/iniciar-sesion',
             query: {
                 redirect: to.fullPath
             }
         }
     }
-    if(to.meta.adminRequired && authUser.role != 'admin') {
-        // Si retornamos un objeto, Vue Router va a redireccionar a esa ruta.
-        return {
-            path: '/iniciar-sesion',
+    if(to.meta.adminRequired && authUser.email != 'admin@email.com') {
+         return {
+            path: '/restricted',
             query: {
                 redirect: to.fullPath
             }

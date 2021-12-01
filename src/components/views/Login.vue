@@ -38,9 +38,7 @@
 import {login} from "../../services/auth.js";
 
 export default {
-    name: "Login",
-    // components: {},
-    // props: {},
+    name: "Login", 
     data: () => ({
         user: {
             email: '',
@@ -49,8 +47,7 @@ export default {
     }),
     
     methods: {
-        handleLogin() {
-            // TODO: Validar...
+        handleLogin() { 
 
             login(this.user.email, this.user.password)
                 .then(() => {
