@@ -12,8 +12,7 @@ import UsersPlans from "../components/views/UsersPlans.vue";
 import Edit from "../components/views/Edit.vue";
 import Suscripcion from "../components/views/Suscripcion.vue";
 import Restricted from "../components/views/Restricted.vue";
-import Pricing from "../components/views/Pricing.vue";
-
+import Pricing from "../components/views/Pricing.vue"; 
 import {authStateSubscribe} from "../services/auth.js";
 const routes = [
     {

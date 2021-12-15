@@ -9,6 +9,9 @@ import {
 } from 'firebase/auth'
  
 import {
+    useToast
+} from "vue-toastification";
+import {
     getFirestore,
     doc,
     setDoc, Timestamp,
@@ -21,7 +24,8 @@ let userData = {
     email: null,
     displayName: null,
     id: null,
-    plan: null 
+    plan: null,
+    role: null
 }
 
 onAuthStateChanged(auth, user => {
@@ -29,7 +33,8 @@ onAuthStateChanged(auth, user => {
         userData = {
             email: user.email,
             displayName: user.displayName,
-            id: user.uid 
+            id: user.uid, 
+            role: null
         };
     } else {
         userData = {
@@ -87,13 +92,20 @@ function notifyAll() {
  * @return {Promise<UserCredential>}
  */
 export function login(email, password) {
+    
+    const toast = useToast();
     return signInWithEmailAndPassword(auth, email, password)
-        .then(credentials => {
-            console.log('inicio sesion')
+        .then(credentials => { 
+            toast.success("Logueado exitosamente")
         })
-        .catch(err => {
-            console.error("Error al autenticar al usuario: ", err);
+        .catch(err => { 
+           if(err == 'FirebaseError: Firebase: Error (auth/wrong-password).'){
+            toast.error('La contraseña es incorrecta. Por favor intente nuevamente.');}
+           if(err == 'FirebaseError: Firebase: Error (auth/user-not-found).'){
+            toast.error('No encontramos el correo ingresado en nuestros registros. Por favor intente nuevamente.');}
+            console.log(err)
         });
+        
 }
 
 /**
@@ -112,7 +124,8 @@ export function register(email, password) {
                 email,
                 displayName: null,
                 created_at: Timestamp.now(),
-                plan: null, 
+                plan: null,
+                role: null,
                 id: credentials.user.uid
             });
         })
