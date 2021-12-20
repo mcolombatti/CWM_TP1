@@ -131,9 +131,12 @@ export function login(email, password) {
  * @return {Promise<UserCredential>}
  */
 export function register(email, password) {
+
+    const toast = useToast();
     return createUserWithEmailAndPassword(auth, email, password)
         .then(credentials => {
-            console.log("Usuario creado... ", credentials);
+
+            toast.success("Usuario registrado exitosamente")
 
             return setDoc(doc(db, 'users', credentials.user.uid), {
                 email,
@@ -144,7 +147,10 @@ export function register(email, password) {
             });
         })
         .catch(err => {
-            console.error("Error al crear el usuario: ", err);
+            if (err == 'FirebaseError: Firebase: Password should be at least 6 characters (auth/weak-password).') {
+                toast.error('La contraseña debe tener al menos 6 caracteres. Por favor intente nuevamente.');
+            }
+            console.error(err);
         });
 }
 
