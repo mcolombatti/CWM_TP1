@@ -4,8 +4,8 @@
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
           <use xlink:href="#bootstrap" /></svg>
-        <span class="fs-5">Hola {{ authUser.email }}!</span>
-      </a>
+        <span class="fs-5">¡Hola {{authUser.profile.displayName || authUser.email}}!</span>
+          </a>
       <hr>
       <ul class="nav nav-pills flex-column mb-auto">
         <li class="nav-item pr-5">
@@ -22,7 +22,7 @@
       <div class="container">
         <div class="row mb-3">
           <div class="col-md-12">
-            <h1>Suscripciones de {{ authUser.email }}</h1>
+            <h1>Suscripciones de {{authUser.profile.displayName || authUser.email}}</h1>
             <p>Aca vas a poder ver los detalles del plan al que te suscribiste</p>
           </div>
           <div class="table-responsive">
@@ -74,7 +74,7 @@
               </tbody>
             </table>
             <div class="row d-flex ">
-              <div class="col-md-6 ">
+              <div class="col-md-3 ">
                 <form action="#" class=" d-flex justify-content-center" method="post"
                   @submit.prevent="unsuscribe( userId)">
                   <button class="mt-3  btn btn-danger btn-sm">

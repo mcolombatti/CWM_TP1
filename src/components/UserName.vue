@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="`/perfil/${email}`" class="UserName">{{email}}</router-link>
+    <router-link :to="`/chat/${email}`" class="UserName">{{email}}</router-link>
 </template>
 
 <script>

@@ -20,9 +20,11 @@
                                     <router-link class="nav-link pr-5 pl-5" to="/pricing">Precios</router-link>
                                 </li>
                             <template v-if="authUser.email !== null">
-                                <li class="nav-item mr-3 ml-3">
-                                    <router-link class="nav-link" to="/chat">Chat</router-link>
-                                </li>
+                                <div v-if="authUser.email !== 'admin@email.com'">
+                                    <li class="nav-item mr-3 ml-3">
+                                        <router-link class="nav-link" to="/chat">Chat</router-link>
+                                    </li>
+                                </div>
 
                                 <li class="nav-item ml-3 mr-3 pr-5">
                                     <router-link class="nav-link" to="/perfil">Perfil</router-link>

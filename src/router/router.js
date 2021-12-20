@@ -1,31 +1,32 @@
-import {createRouter, createWebHashHistory} from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import Home from "../components/views/Home.vue";
 import Login from "../components/views/Login.vue";
 import Chat from "../components/views/Chat.vue";
-import Register from "../components/views/Register.vue"; 
-import Profile from "../components/views/Profile.vue"; 
-import ProfileUser from "../components/views/ProfileUser.vue"; 
+import Register from "../components/views/Register.vue";
+import Profile from "../components/views/Profile.vue";
+import ProfileUser from "../components/views/ProfileUser.vue";
 import ChatUser from "../components/views/ChatUser.vue";
 import Create from "../components/views/Create.vue";
 import Panel from "../components/views/Panel.vue";
 import UsersPlans from "../components/views/UsersPlans.vue";
 import Edit from "../components/views/Edit.vue";
+import UserPlanDetail from "../components/views/UserPlanDetail.vue";
 import Suscripcion from "../components/views/Suscripcion.vue";
 import Restricted from "../components/views/Restricted.vue";
-import Pricing from "../components/views/Pricing.vue"; 
-import {authStateSubscribe} from "../services/auth.js";
+import Pricing from "../components/views/Pricing.vue";
+import { authStateSubscribe } from "../services/auth.js";
 const routes = [
     {
         name: 'home',
         component: Home,
         path: '/',
     },
-    
+
     {
         name: 'register',
         component: Register,
         path: '/registro',
-    },{
+    }, {
         name: 'login',
         component: Login,
         path: '/iniciar-sesion',
@@ -34,7 +35,9 @@ const routes = [
         name: 'chat',
         component: Chat,
         path: '/chat',
-        meta: { 
+        meta: {
+
+            onlyStandardUsers: true
         }
     },
     {
@@ -82,7 +85,7 @@ const routes = [
             authRequired: true,
             adminRequired: true
         }
-       
+
     },
     {
         name: 'users-plans',
@@ -92,7 +95,7 @@ const routes = [
             authRequired: true,
             adminRequired: true
         }
-       
+
     },
     {
         name: 'create',
@@ -102,30 +105,38 @@ const routes = [
             authRequired: true,
             adminRequired: true
         }
-       
+
     },
     {
         path: '/edit/:id',
         name: 'edit',
         component: Edit,
-           meta: {
+        meta: {
             authRequired: true,
             adminRequired: true
         }
-      },{
+    }, {
+        path: '/user/:plan/:displayName',
+        name: 'user-plan',
+        component: UserPlanDetail,
+        meta: {
+            authRequired: true,
+            adminRequired: true
+        }
+    }, {
         name: 'suscripciones',
         component: Suscripcion,
         path: '/perfil/suscripciones',
         meta: {
-            authRequired: true 
+            authRequired: true
         }
-       
-    },{
+
+    }, {
         name: 'Restricted',
         component: Restricted,
         path: '/restricted',
-         
-       
+
+
     },
 ];
 const router = createRouter({
@@ -133,11 +144,6 @@ const router = createRouter({
     history: createWebHashHistory(),
 });
 
-/*
- |--------------------------------------------------------------------------
- | Manejo del acceso a rutas que requieran autenticación.
- |--------------------------------------------------------------------------
- */
 let authUser = {
     email: null,
     displayName: null,
@@ -147,17 +153,24 @@ let authUser = {
 authStateSubscribe(user => authUser = user);
 
 router.beforeEach((to) => {
-    if(to.meta.authRequired && authUser.email === null) {
-         return {
+    if (to.meta.authRequired && authUser.email === null) {
+        return {
             path: '/iniciar-sesion',
             query: {
                 redirect: to.fullPath
             }
         }
     }
-    if(to.meta.adminRequired && authUser.email != 'admin@email.com') {
-         return {
+    if (to.meta.adminRequired && authUser.email != 'admin@email.com') {
+        return {
             path: '/restricted',
+            query: {
+                redirect: to.fullPath
+            }
+        }
+    } if (to.meta.onlyStandardUsers && authUser.email == 'admin@email.com') {
+        return {
+            path: '/',
             query: {
                 redirect: to.fullPath
             }

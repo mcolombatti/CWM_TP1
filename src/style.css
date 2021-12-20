@@ -9,7 +9,7 @@ li{
 text-decoration: none;
 
 } 
-
+.error-red{color:rgba(251, 84, 69, 0.835) }
 .vista-container{
   height: 100vh;
   display: flex;
@@ -19,3 +19,11 @@ text-decoration: none;
   justify-content: center;
 }
   
+.avatar-chat {
+  border-radius: 50%;
+  max-width: 20%;
+}
+.avatar-profile {
+  border-radius: 50%;
+  max-width: 50%;
+}

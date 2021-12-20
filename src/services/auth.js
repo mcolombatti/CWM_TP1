@@ -1,4 +1,4 @@
- 
+
 import {
     getAuth,
     signInWithEmailAndPassword,
@@ -7,62 +7,75 @@ import {
     onAuthStateChanged,
     updateProfile
 } from 'firebase/auth'
- 
+
 import {
     useToast
 } from "vue-toastification";
 import {
     getFirestore,
     doc,
-    setDoc, Timestamp,
-} from "firebase/firestore"; 
+    setDoc, Timestamp, getDoc
+} from "firebase/firestore";
+
+import {
+    getStorage,
+    ref,
+    uploadBytes,
+    getDownloadURL,
+} from "firebase/storage";
+
 const auth = getAuth();
 
 const db = getFirestore();
+
+const storage = getStorage();
 
 let userData = {
     email: null,
     displayName: null,
     id: null,
     plan: null,
-    role: null
+    profile: {}
 }
 
 onAuthStateChanged(auth, user => {
-    if(user) {
+    if (user) {
         userData = {
+
+            ...userData,
             email: user.email,
             displayName: user.displayName,
-            id: user.uid, 
-            role: null
+            id: user.uid
         };
+        getProfile();
     } else {
         userData = {
             email: null,
             displayName: null,
             id: null,
-            plan: null
+            plan: null,
+            profile: {}
         };
-    } 
+    }
     notifyAll();
 });
-  
+
 let observers = [];
 
 /**
  * Permite registrar un observer para ser notificado
  *
  * @param {Function} observerCallback
- * @return {Function} - Función para cancelar la suscripción.
+ * @return {Function} - Retorna la funcion que permite cancelar la suscripción.
  */
 export function authStateSubscribe(observerCallback) {
     observers.push(observerCallback);
- 
+
     notify(observerCallback);
 
     console.log("Observer agregado, stack actual: ", observers);
 
-    return () => { 
+    return () => {
         observers = observers.filter(callback => callback !== observerCallback);
     }
 }
@@ -73,8 +86,8 @@ export function authStateSubscribe(observerCallback) {
  * @param {Function} callback
  */
 function notify(callback) {
-    
-    callback({...userData});
+
+    callback({ ...userData });
 }
 
 /**
@@ -83,7 +96,7 @@ function notify(callback) {
 function notifyAll() {
     observers.forEach(obs => notify(obs));
 }
- 
+
 /**
  * Autentica al usuario.
  *
@@ -92,20 +105,22 @@ function notifyAll() {
  * @return {Promise<UserCredential>}
  */
 export function login(email, password) {
-    
+
     const toast = useToast();
     return signInWithEmailAndPassword(auth, email, password)
-        .then(credentials => { 
+        .then(credentials => {
             toast.success("Logueado exitosamente")
         })
-        .catch(err => { 
-           if(err == 'FirebaseError: Firebase: Error (auth/wrong-password).'){
-            toast.error('La contraseña es incorrecta. Por favor intente nuevamente.');}
-           if(err == 'FirebaseError: Firebase: Error (auth/user-not-found).'){
-            toast.error('No encontramos el correo ingresado en nuestros registros. Por favor intente nuevamente.');}
+        .catch(err => {
+            if (err == 'FirebaseError: Firebase: Error (auth/wrong-password).') {
+                toast.error('La contraseña es incorrecta. Por favor intente nuevamente.');
+            }
+            if (err == 'FirebaseError: Firebase: Error (auth/user-not-found).') {
+                toast.error('No encontramos el correo ingresado en nuestros registros. Por favor intente nuevamente.');
+            }
             console.log(err)
         });
-        
+
 }
 
 /**
@@ -119,13 +134,12 @@ export function register(email, password) {
     return createUserWithEmailAndPassword(auth, email, password)
         .then(credentials => {
             console.log("Usuario creado... ", credentials);
-        
+
             return setDoc(doc(db, 'users', credentials.user.uid), {
                 email,
                 displayName: null,
                 created_at: Timestamp.now(),
                 plan: null,
-                role: null,
                 id: credentials.user.uid
             });
         })
@@ -143,19 +157,70 @@ export function logout() {
     return signOut(auth);
 }
 
+
 /**
- * Permite actualizar los datos del usuario autenticado.
+ * Actualiza los datos del usuario autenticado.
  *
- * @param {{displayName: string}} newData
+ * @param {{newData: Object}} newData
+ * @param {File|null} avatar
  * @return {Promise<void>}
  */
-export function updateUserProfile(newData) {
-    return updateProfile(auth.currentUser, newData)
-        .then(() => {
-             userData.displayName = newData.displayName;
-            notifyAll();
-        })
-        .catch(err => {
-            console.error("Error al actualizar el perfil: ", err);
-        });
+export async function updateUserProfile(newData, avatar = null) {
+
+    await updateProfile(auth.currentUser, newData);
+    userData.displayName = newData.displayName;
+    userData.email = newData.email;
+
+    if (avatar) {
+        const filename = auth.currentUser.uid + ".jpg";
+        const avatarRef = ref(storage, 'users/' + filename);
+
+        const result = await uploadBytes(avatarRef, avatar);
+        newData.avatar = result.ref.fullPath;
+    }
+
+    const userRef = doc(db, 'users', auth.currentUser.uid);
+    await setDoc(userRef, newData, { merge: true });
+    userData.profile = newData;
+
+    if (userData.profile.avatar) {
+        getDownloadURL(ref(storage, userData.profile.avatar))
+            .then(url => {
+                userData.profile.avatar = url;
+                notifyAll();
+            });
+    }
+    notifyAll();
+    return true;
+}
+/**
+ * 
+ * @param {id:number} id 
+ * @return {Promise<void>}
+ */
+export async function getProfile(id = null) {
+    const uid = id || auth.currentUser.uid;
+
+
+    if (id == null && userData.profile.displayName != null) {
+
+        return userData.profile;
+
+    }
+
+    const snap = await getDoc(doc(db, 'users', uid));
+    const data = snap.data();
+
+    if (data.avatar) {
+        data.avatar = await getDownloadURL(ref(storage, data.avatar));
+    }
+
+    if (id == null) {
+        userData.profile = data;
+        console.log(userData.profile)
+        notifyAll();
+    }
+
+    return data;
+
 }

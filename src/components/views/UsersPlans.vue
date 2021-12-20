@@ -4,7 +4,7 @@
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                 <svg class="bi me-2" width="40" height="32">
                     <use xlink:href="#bootstrap" /></svg>
-                <span class="fs-5">Hola {{ authUser.email }}!</span>
+                <span class="fs-5">Hola{{ authUser.email }}!</span>
             </a>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
@@ -24,8 +24,8 @@
                     <section class="   users-plan border-bottom">
                         <div class="container px-5 my-5">
                             <div class="text-center mb-5">
-                                <h1 class="fw-bolder">Panel de Administrador</h1>
-                                <p class="lead mb-0">Planes de Suscripcion</p>
+                                <h1 class="fw-bolder">Suscripciones de los usuarios</h1>
+                                <p>Acá vas a poder ver los usuarios que tienen un plan contratado</p>
                             </div>
 
                             <table class="table m-0">
@@ -33,15 +33,35 @@
                                     <tr>
                                         <th scope="col">Usuario</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Plan</th>
+                                        <th scope="col"> </th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="{ id, email, plan, displayName } in users" :key="id">
+                                    <tr v-for="{ id, email, plan, displayName, admin } in users" :key="id">
                                         <td>{{ displayName }}</td>
                                         <td>{{ email }}</td>
-                                        <td>{{ plan }}</td>
+                                        <td></td>
+                                        <td>
+                                            <div v-if="!admin  ">
+                                                <form action="#" method="post" @submit.prevent>
+                                                    <router-link class="btn btn-primary btn-sm me-2 mb-2"
+                                                        :to="`/user/${plan}/${displayName}`">
+                                                        Ver detalles
+                                                    </router-link>
+                                                </form>
 
+
+
+                                            </div>
+                                        </td>
+                                        <td><div  v-if="!admin  ">
+                                            
+                                                <router-link class="btn btn-primary btn-sm me-2 mb-2"
+                                                    :to="`/chat/${email}`">Iniciar Chat Privado</router-link>
+                                        </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -57,6 +77,11 @@
     import {
         getFirestore
     } from "firebase/firestore";
+    import {
+        getInitialMessages,
+        sendMessage,
+        subscribeToIncomingMessages
+    } from "../../services/chat.js";
     import 'babel-polyfill';
     import {
         getPlanes,
@@ -64,14 +89,16 @@
     } from '../../services/firebase.js'
     import {
         onMounted,
+        onUnmounted,
         ref,
     } from "vue";
 
     import useAuth from "../../composition/useAuth.js";
     const db = getFirestore();
-    
+
     export default {
         name: "UsersPlans",
+
         setup() {
             const {
                 authUser
@@ -84,18 +111,43 @@
             form.value.displayName = authUser.value.displayName;
             const planes = ref({});
             const users = ref({});
-            
+            const admin = authUser.value.profile.admin
             onMounted(async () => {
                 const res = await getPlanes(db)
                 const resUsers = await getUsersFromCollection(db)
                 planes.value = res
                 users.value = resUsers
+                console.log(users.value)
             });
+            const messages = ref([]);
+            let unsubscribe;
+            getInitialMessages()
+                .then(data => {
+                    messages.value = [...data].reverse();
+
+                    unsubscribe = subscribeToIncomingMessages(newMsgs => {
+                        console.log("messages: ", messages.value);
+                        console.log("newMsgs: ", newMsgs);
+
+                        messages.value = [...messages.value, ...newMsgs];
+                    });
+                });
+            onUnmounted(() => {
+                if (typeof unsubscribe === 'function') unsubscribe();
+            });
+            const newMessage = ref('');
+            const handleSubmit = () => {
+                sendMessage(newMessage.value).then(() => newMessage.value = '');
+            }
             return {
                 planes,
                 authUser,
                 form,
-                users
+                users,
+                admin,
+                messages,
+                newMessage,
+                handleSubmit,
             };
         }
     }
