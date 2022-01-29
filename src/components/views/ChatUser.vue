@@ -3,13 +3,13 @@
         <div class="container py-5 px-4">
 
 
-            <div class="row rounded-lg overflow-hidden shadow">
+            <div id="chat-container" class="row rounded-lg overflow-hidden shadow">
 
                 <div class="col-5 px-0">
                     <div class="bg-white">
 
                         <div class="bg-gray px-4 py-2 bg-light">
-                            <h2>Chat Privado con {{ interlocutorEmail }}</h2>
+                            <h1 class="h4">Chat Privado con {{ interlocutorEmail }}</h1>
                         </div>
 
                         <div class="messages-box">
@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="col-7 px-0">
-                    <div class="px-4 py-5 chat-box bg-white">
+                    <div class="px-4 py-5 chat-box bg-white" id="inner-chat">
 
                         <div class="media w-50 mb-3" v-for="message in messages">
                             <div v-if="authUser.profile.avatar">

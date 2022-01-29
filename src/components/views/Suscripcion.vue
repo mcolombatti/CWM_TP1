@@ -30,7 +30,9 @@
               <thead>
                 <tr>
                   <th></th>
-                  <th>{{nombrePlan}}</th>
+                   
+                    <th>{{nombrePlan}}  </th>
+                 
                 </tr>
               </thead>
               <tbody>
@@ -129,7 +131,7 @@
         displayName: null,
       });
       const caracteristicas = ref({});
-      const nombrePlan = ref({});
+      const nombrePlan = ref('');
       form.value.displayName = authUser.value.displayName;
 
       function updateProfile() {

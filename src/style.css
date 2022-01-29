@@ -18,7 +18,9 @@ text-decoration: none;
   align-items: center;
   justify-content: center;
 }
-  
+  #chat-container, #inner-chat{
+    min-height: 100vh;
+  }
 .avatar-chat {
   border-radius: 50%;
   max-width: 20%;
